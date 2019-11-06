@@ -9,8 +9,9 @@
 3.  管理员是平台的后台管理者 可以进行商品上下架，修改商品信息，查看所有订单情况<br>
  可以管理订单 <br>
 4．下面是功能结构图：<br>
-<img src="/img/功能流程图.jpg"/>
-建数据库  
+![](img/功能流程图.jpg)
+##  建数据库 
+create database gourdmall 
 用户表  
 CREATE TABLE `user` (  
   `uid` varchar(32) NOT NULL COMMENT "用户编号",   
@@ -92,5 +93,3 @@ CREATE TABLE `orderitem` (
   CONSTRAINT `order_item_fk_0001` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),   
   CONSTRAINT `order_item_fk_0002` FOREIGN KEY (`oid`) REFERENCES `orders` (`oid`)   
 ) ;   
-
-   
