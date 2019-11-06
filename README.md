@@ -9,29 +9,32 @@
 3.  管理员是平台的后台管理者 可以进行商品上下架，修改商品信息，查看所有订单情况<br>
  可以管理订单 <br>
 4．下面是功能结构图：<br>
-![](img/功能流程图.jpg)
+
 ##  建数据库 
-create database gourdmall 
-用户表  
-CREATE TABLE `user` (  
-  `uid` varchar(32) NOT NULL COMMENT "用户编号",   
-  `username` varchar(20) DEFAULT NULL COMMENT "用户名",	  	
-  `password` varchar(20) DEFAULT NULL COMMENT "密码",  		
-  `name` varchar(20) DEFAULT NULL COMMENT "昵称",	  		
-  `email` varchar(30) DEFAULT NULL COMMENT "电子邮箱",  			
-  `telephone` varchar(20) DEFAULT NULL COMMENT "电话",  		
-  `birthday` date DEFAULT NULL COMMENT "生日",	  			
-  `sex` varchar(10) DEFAULT NULL COMMENT "性别",		  
+create database gourdmall   
+用户表    
+CREATE TABLE `user` (    
+  `uid` varchar(32) NOT NULL COMMENT "用户编号",      
+  
+  `username` varchar(20) DEFAULT NULL COMMENT "用户名",  
+  	  	
+  `password` varchar(20) DEFAULT NULL COMMENT "密码",  	  
+  	
+  `name` varchar(20) DEFAULT NULL COMMENT "昵称",	     		
+  `email` varchar(30) DEFAULT NULL COMMENT "电子邮箱",    			
+  `telephone` varchar(20) DEFAULT NULL COMMENT "电话",  		  
+  `birthday` date DEFAULT NULL COMMENT "生日",   	  			
+  `sex` varchar(10) DEFAULT NULL COMMENT "性别",	  	  
   `state` int(11) DEFAULT 0 COMMENT "状态",				#0=未激活，1=已激活  
-  `code` varchar(64) DEFAULT NULL COMMENT "激活码",	  	
-  PRIMARY KEY (`uid`)  
-) ;
-INSERT INTO `user` VALUES  
-('1','aaa','aaa','小华','617662163@qq.com','18379407495','2000-02-01','男',1,NULL),     
-('2','ccc','ccc','aaa','bbb@store.com','15723689921','2015-11-04','男',0,'9782f3e837ff422b9aee8b6381ccf927bdd9d2ced10d48f4ba4b9f187edf7738'),  
-('3','bb','bb','张三','bbb@store.com','15723689921','1990-02-01','男',0,'1258e96181a9457987928954825189000bae305094a042d6bd9d2d35674684e6'),  
-('4','cc','cc','张三','bbb@store.com','15723689921','2015-11-03','男',0,'19f100aa81184c03951c4b840a725b6a98097aa1106a4a38ba1c29f1a496c231'),  
-('5','bbb','bbb','老王','bbb@store.com','15712344823','2000-02-01','男',0,'71a3a933353347a4bcacff699e6baa9c950a02f6b84e4f6fb8404ca06febfd6f');  
+  `code` varchar(64) DEFAULT NULL COMMENT "激活码",	    	
+  PRIMARY KEY (`uid`)    
+) ;   
+INSERT INTO `user` VALUES      
+('1','aaa','aaa','小华','617662163@qq.com','18379407495','2000-02-01','男',1,NULL),        
+('2','ccc','ccc','aaa','bbb@store.com','15723689921','2015-11-04','男',0,'9782f3e837ff422b9aee8b6381ccf927bdd9d2ced10d48f4ba4b9f187edf7738'),     
+('3','bb','bb','张三','bbb@store.com','15723689921','1990-02-01','男',0,'1258e96181a9457987928954825189000bae305094a042d6bd9d2d35674684e6'),     
+('4','cc','cc','张三','bbb@store.com','15723689921','2015-11-03','男',0,'19f100aa81184c03951c4b840a725b6a98097aa1106a4a38ba1c29f1a496c231'),     
+('5','bbb','bbb','老王','bbb@store.com','15712344823','2000-02-01','男',0,'71a3a933353347a4bcacff699e6baa9c950a02f6b84e4f6fb8404ca06febfd6f');     
    
    
 --  创建分类表
