@@ -10,6 +10,8 @@
  可以管理订单 <br>
 4．下面是功能结构图：<br>
 
+![](img/功能流程图.jpg)
+
 ##  建数据库 
 create database gourdmall   
 用户表    
