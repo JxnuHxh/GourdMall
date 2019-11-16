@@ -11,8 +11,17 @@
 
 ![](img/功能流程图.jpg)
 
-##  建数据库 
-create database gourdmall   
+##  建数据库  
+
+```sql
+# 创建数据库
+create database gourdmall
+# 创建通用账户并授权
+create user 'gourdmall'@'localhost' identified by '123456';
+grant all privileges on gourdmall.* to 'gourdmall'@'localhost';
+flush privileges;
+```
+
 用户表    
 CREATE TABLE `user` (    
   `uid` varchar(32) NOT NULL COMMENT "用户编号",  
