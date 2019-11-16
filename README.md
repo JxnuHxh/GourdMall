@@ -1,6 +1,5 @@
 # GourdMall
-### 葫芦商城
-<br>
+### 葫芦商城     
 系统功能描述 用户一共分为三种,普通用户（游客），会员（注册用户），管理员<br>
 1. 普通用户可以访问商城首页 ，进行商品浏览 查找商品 也可以注册成为会员<br>
 2. 会员用户 有普通用户的所有功能，还可以添加商品到购物车，并对购物车的商品<br>
@@ -27,7 +26,7 @@ CREATE TABLE `user` (
   `email` varchar(30) DEFAULT NULL COMMENT "电子邮箱",     
      			
   `telephone` varchar(20) DEFAULT NULL COMMENT "电话",    		  
-  `birthday` date DEFAULT NULL COMMENT "生日",     			
+  `birthday` date DEFAULT NULL COMMENT "生日",    
   `sex` varchar(10) DEFAULT NULL COMMENT "性别",	     	  
   `state` int(11) DEFAULT 0 COMMENT "状态", #0=未激活，1=已激活  
   `code` varchar(64) DEFAULT NULL COMMENT "激活码",	    	
@@ -77,13 +76,13 @@ CREATE TABLE `category` (
  CREATE TABLE `orders` (   
    `oid` varchar(32) NOT NULL,    
    `ordertime` datetime DEFAULT NULL comment "下单时间",	     
-   `total` double DEFAULT NULL comment "总价",	    			
+   `total` double DEFAULT NULL comment "总价",   
    `state` int(11) DEFAULT NULL comment "订单状态",  	      
    			#1=未付款;2=已付款,未发货;3=已发货,没收货;4=收货,订单结束   
    `address` varchar(30) DEFAULT NULL comment "收获地址",   
-   `name` varchar(20) DEFAULT NULL comment "收货人",	  	
-   `telephone` varchar(20) DEFAULT NULL comment "收货人带电话",   	
-   `uid` varchar(32) DEFAULT NULL ,     
+   `name` varchar(20) DEFAULT NULL comment "收货人",    
+   `telephone` varchar(20) DEFAULT NULL comment "收货人带电话",    
+   `uid` varchar(32) DEFAULT NULL ,    
    PRIMARY KEY (`oid`),    
    KEY `order_fk_0001` (`uid`),    
    CONSTRAINT `order_fk_0001` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`)        
