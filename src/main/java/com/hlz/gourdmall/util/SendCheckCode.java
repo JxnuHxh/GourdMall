@@ -2,6 +2,7 @@ package com.hlz.gourdmall.util;
 
 import okhttp3.Headers;
 import okhttp3.Response;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import java.util.Random;
  * @date: 2019/11/16
  * @description: 发送验证码工具类
  */
+@Component
 public class SendCheckCode {
     /**
      * 生成验证码
@@ -36,7 +38,7 @@ public class SendCheckCode {
      * @return 发送结果
      * @throws IOException
      */
-    public String sendCode(String sno, String sname) throws IOException {
+    public Map<String, String> sendCode(String sno, String sname) throws IOException {
         String receive = sno + "|" + sname + ",";
         OkHttpClientUtil clientUtil = OkHttpClientUtil.getInstance();
         String code = getCode();
@@ -53,9 +55,13 @@ public class SendCheckCode {
         data.put("ctl1_txtContent", code);
         Response response = clientUtil.postData(url, data, headers);
         String html = Objects.requireNonNull(response.body()).string();
+        Map<String, String> result = new HashMap<>();
+        result.put("code", code);
         if (html.contains("发送成功")) {
-            return "发送成功";
+            result.put("msg", "success");
+            return result;
         }
-        return "发送失败";
+        result.put("msg", "fail");
+        return result;
     }
 }
