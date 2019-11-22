@@ -109,5 +109,6 @@ CREATE TABLE `orderitem` (
   KEY `order_item_fk_0002` (`oid`),      
   CONSTRAINT `order_item_fk_0001` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),      
   CONSTRAINT `order_item_fk_0002` FOREIGN KEY (`oid`) REFERENCES `orders` (`oid`)     
-) ;  
+) ; 
+
   
