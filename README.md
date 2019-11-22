@@ -11,7 +11,7 @@
 
 ![](img/功能流程图.jpg)
 
-##  建数据库  
+##  新建数据库
 
 ```sql
 # 创建数据库
@@ -109,4 +109,5 @@ CREATE TABLE `orderitem` (
   KEY `order_item_fk_0002` (`oid`),      
   CONSTRAINT `order_item_fk_0001` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),      
   CONSTRAINT `order_item_fk_0002` FOREIGN KEY (`oid`) REFERENCES `orders` (`oid`)     
-) ;     
+) ;  
+  
