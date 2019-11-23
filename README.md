@@ -113,4 +113,8 @@ CREATE TABLE `orderitem` (
   CONSTRAINT `order_item_fk_0002` FOREIGN KEY (`oid`) REFERENCES `orders` (`oid`)     
 ) ; 
 
-
+> 前端项目在：**src/main/resources/gourd-mall**中
+> 运行：需要配置cnpm,如果报：module错误请删除node-modules目录后重新运行下述命令
+> - 1、cd 进入gourd-mall中
+> - 2、cnpm install
+> - 3、cnpm run dev
