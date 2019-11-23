@@ -113,14 +113,4 @@ CREATE TABLE `orderitem` (
   CONSTRAINT `order_item_fk_0002` FOREIGN KEY (`oid`) REFERENCES `orders` (`oid`)     
 ) ; 
 
-## 接口约束
-### 前台接口设计
-> 1 用户登录接口
-
- 端口名称 | login
- ---- | ----
- 接口描述 | 用户登录
- 接口地址 | http://localhost:8888/login
- 
- 
 
