@@ -25,6 +25,7 @@ flush privileges;
 ```
 
 用户表    
+```sql
 CREATE TABLE `user` (    
   `uid` varchar(32) NOT NULL COMMENT "用户编号",  
       
@@ -118,3 +119,5 @@ CREATE TABLE `orderitem` (
 > - 1、cd 进入gourd-mall中
 > - 2、cnpm install
 > - 3、cnpm run dev
+=======
+```
