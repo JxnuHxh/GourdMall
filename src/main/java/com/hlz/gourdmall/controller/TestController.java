@@ -31,6 +31,7 @@ public class TestController {
     @PostMapping("/code")
     @ResponseBody
     public Map<String, String> checkCode(String sno, String sname) throws IOException {
+        System.out.println(sno + sname);
         Map<String, String> result = sendCheckCode.sendCode(sno.trim(), sname.trim());
         return result;
     }
