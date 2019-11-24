@@ -25,6 +25,7 @@ flush privileges;
 ```
 
 用户表    
+```sql
 CREATE TABLE `user` (    
   `uid` varchar(32) NOT NULL COMMENT "用户编号",  
       
@@ -112,5 +113,4 @@ CREATE TABLE `orderitem` (
   CONSTRAINT `order_item_fk_0001` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),      
   CONSTRAINT `order_item_fk_0002` FOREIGN KEY (`oid`) REFERENCES `orders` (`oid`)     
 ) ; 
-
-  
+```
