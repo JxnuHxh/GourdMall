@@ -17,11 +17,17 @@
 
 ```sql
 # 创建数据库
-create database gourdmall
+create database gourdmall DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 # 创建通用账户并授权
 create user 'gourdmall'@'localhost' identified by '123456';
 grant all privileges on gourdmall.* to 'gourdmall'@'localhost';
 flush privileges;
+```
+
+```bash
+# 数据库变更执行流程
+mvn flyway:migrate
+mvn mybatis-generator:generate
 ```
 
 用户表    
@@ -113,11 +119,11 @@ CREATE TABLE `orderitem` (
   CONSTRAINT `order_item_fk_0001` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),      
   CONSTRAINT `order_item_fk_0002` FOREIGN KEY (`oid`) REFERENCES `orders` (`oid`)     
 ) ; 
-
+```
 > 前端项目在：**src/main/resources/gourd-mall**中
 > 运行：需要配置cnpm,如果报：module错误请删除node-modules目录后重新运行下述命令
 > - 1、cd 进入gourd-mall中
 > - 2、cnpm install
 > - 3、cnpm run dev
 =======
-```
+

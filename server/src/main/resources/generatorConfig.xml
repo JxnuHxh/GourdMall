@@ -30,5 +30,6 @@
         </javaClientGenerator>
         <table tableName="user" domainObjectName="User"/>
         <table tableName="check_code" domainObjectName="CheckCode"/>
+        <table tableName="token" domainObjectName="Token"/>
     </context>
 </generatorConfiguration>
