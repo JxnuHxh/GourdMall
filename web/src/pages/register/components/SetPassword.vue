@@ -92,7 +92,7 @@ export default {
                 this.$message.success('设置密码成功')
                 this.$emit('setPasswordSuccess')
               } else {
-                this.$message.error('设置密码失败，请重新设置')
+                this.$message.error('设置密码失败，请重新设置!!')
               }
             }
           )
