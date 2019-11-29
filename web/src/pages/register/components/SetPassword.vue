@@ -1,7 +1,7 @@
 <template>
   <el-form label-position="top" ref="bindForm" :rules="rules" :model="bindForm">
-    <el-form-item prop="stunum">
-      <el-input v-model="bindForm.stunum" placeholder="请输入学号"> </el-input>
+    <el-form-item prop="studentNo">
+      <el-input v-model="bindForm.studentNo" :disabled="true"> </el-input>
     </el-form-item>
 
     <el-form-item prop="password">
@@ -19,22 +19,26 @@
       ></el-input>
     </el-form-item>
 
-    <el-button type="warning" @click="stnBind('bindForm')">立即绑定</el-button>
+    <el-button type="warning" @click="setPassword('bindForm')">立即绑定</el-button>
   </el-form>
 </template>
 
 <script>
+import { setPassword } from '../../../axios/api.js'
 export default {
-  name: 'StnBind',
+  name: 'SetPassword',
+  props: [
+    'studentNo'
+  ],
   data () {
     return {
       bindForm: {
-        stunum: '',
+        studentNo: '',
         password: '',
         ckpassword: ''
       },
       rules: {
-        stunum: [
+        studentNo: [
           {
             required: true,
             message: '请输入学号',
@@ -68,14 +72,30 @@ export default {
       }
     }
   },
+  created () {
+    this.bindForm.studentNo = this.studentNo
+  },
   methods: {
     // 绑定学号
-    stnBind: function (formName) {
-      console.log('绑定学号')
+    setPassword: function (formName) {
+      console.log('设置密码')
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // 后端交互
-          this.$emit('StnBindSuccess')
+          let data = {
+            studentNo: this.bindForm.studentNo,
+            password: this.bindForm.password
+          }
+          setPassword(data).then(
+            (result) => {
+              console.info(result)
+              if (result.code === 2200) {
+                this.$message.success('设置密码成功')
+                this.$emit('setPasswordSuccess')
+              } else {
+                this.$message.error('设置密码失败，请重新设置')
+              }
+            }
+          )
         } else {
           return false
         }

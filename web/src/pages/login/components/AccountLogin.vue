@@ -6,15 +6,20 @@
     :model="accountForm"
     class="login-box"
   >
-    <el-form-item prop="username">
+    <el-form-item prop="studentNo">
       <el-input
-        v-model="accountForm.username"
+        v-model="accountForm.studentNo"
         placeholder="请输入学号"
-      ></el-input>
+      >
+      <template slot="prepend"
+          >20</template
+        >
+      </el-input>
     </el-form-item>
     <el-form-item prop="password">
       <el-input
         v-model="accountForm.password"
+        type="password"
         placeholder="请输入密码"
       ></el-input>
     </el-form-item>
@@ -33,17 +38,11 @@
   </el-form>
 </template>
 <script>
-import { getCookie } from '../../../assets/js/cookie'
-import { loginTest } from '../../../axios/api.js'
+// import { getCookie } from '../../../assets/js/cookie'
+import { accountLogin } from '../../../axios/api.js'
 
 export default {
   mounted () {
-    if (getCookie('username')) {
-      console.getCookie('username')
-      this.$router.push('/register')
-    } else {
-      console.log('未登录')
-    }
   },
   name: 'AccountLogin',
   data () {
@@ -55,16 +54,26 @@ export default {
         marginTop: '20px'
       },
       accountForm: {
-        username: '',
+        studentNo: '',
         password: ''
       },
       // 表单验证
       rules: {
-        username: [
+        studentNo: [
           {
             required: true,
             message: '学号不可以为空',
             trigger: 'blur'
+          },
+          {
+            validator: (rule, value, callback) => {
+              const reg = 10 && /^((13|14|15|17|18|19){1}\d{8})$/
+              if (!reg.test(this.accountForm.studentNo)) {
+                callback(new Error('学号格式错误'))
+              } else {
+                callback()
+              }
+            }
           }
         ],
         password: [
@@ -85,7 +94,43 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // this.$router.push('/main')
-          this.testLogin()
+          let data = {
+            studentNo: '20' + this.accountForm.studentNo,
+            password: this.accountForm.password
+          }
+          accountLogin(data).then(
+            (result) => {
+              if (result) {
+                switch (result.code) {
+                  // 登录成功
+                  case 2300: {
+                    this.$message({
+                      message: '登录成功',
+                      type: 'success'
+                    })
+                    // console.log(result.data.token)
+                    window.sessionStorage.setItem('token', result.data.token)
+                    this.$router.push('/')
+                    break
+                  }
+                  case 4300: {
+                    this.$message({
+                      message: '账号或者密码错误',
+                      type: 'error'
+                    })
+                    break
+                  }
+                  case 4400: {
+                    this.$message({
+                      message: '该用户不存在',
+                      type: 'info'
+                    })
+                    break
+                  }
+                };
+              }
+            }
+          )
         } else {
           // this.dialogVisible = true
           return false
@@ -98,19 +143,8 @@ export default {
 
     Forget: function () {
       console.log('打开路由：/forget')
-    },
-    testLogin: function () {
-      let data = {
-        sno: this.accountForm.password,
-        sname: this.accountForm.username
-      }
-      // 验证
-      loginTest(data).then(
-        (result) => {
-          console.log(result)
-        }
-      )
     }
+
   }
 }
 </script>

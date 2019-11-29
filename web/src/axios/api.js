@@ -1,5 +1,25 @@
-import {postData} from './request'
+import {postData, getData} from './request'
 
 export const loginTest = data => {
   return postData('/api/test/code', data)
+}
+
+export const sendCheckCode = data => {
+  console.log(data)
+  return getData('/api/sendCheckCode', data)
+}
+
+export const confirmCheckCode = data => {
+  console.log(data)
+  return postData('/api/confirmCheckCode', data)
+}
+
+export const setPassword = data => {
+  console.log(data)
+  return postData('/api/setPassword', data)
+}
+
+export const accountLogin = data => {
+  // console.log(data)
+  return postData('/api/login', data)
 }

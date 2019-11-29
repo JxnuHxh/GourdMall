@@ -27,10 +27,11 @@
             justify="center"
             align="middle"
             style="background: white"
-          >
-
+            >
             <transition enter-active-class="animated bounceInDown">
-                <component :is="componentName" @toStnBind="toStnBind" @StnBindSuccess="toSuccess"></component>
+              <keep-alive>
+                <component :is="componentName" :studentNo="studentNo" @toSetPassword="setPassword" @setPasswordSuccess="toSuccess"></component>
+              </keep-alive>
             </transition>
           </el-main>
           <el-footer
@@ -52,7 +53,7 @@
 import logo from '../../../common/images/mi-logo.png'
 import FadeAnimation from '../../../common/fade/FadeAnimation'
 import RegisterForm from './RegisterForm'
-import StnBind from './StnbindForm'
+import SetPassword from './SetPassword'
 import RegisterSuccess from './ResisterSuccess'
 export default {
   name: 'RegisterContainer',
@@ -62,24 +63,27 @@ export default {
       step: 0,
       show: true,
       success: false,
-      componentName: RegisterForm
+      componentName: RegisterForm,
+      studentNo: ''
     }
   },
   components: {
     RegisterForm: RegisterForm,
     FadeAnimation: FadeAnimation,
-    StnBind: StnBind,
+    SetPassword: SetPassword,
     RegisterSuccess: RegisterSuccess
   },
   methods: {
-    toStnBind: function () {
-      this.componentName = StnBind
+    setPassword: function (studentNo) {
+      this.studentNo = studentNo
+      console.log(this.studentNo)
+      this.componentName = SetPassword
       this.step++
       // 进行验证
     },
     toSuccess: function () {
       this.componentName = RegisterSuccess
-      this.step++
+      this.step += 2
     }
   }
 }

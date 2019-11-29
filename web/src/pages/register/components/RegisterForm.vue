@@ -6,13 +6,19 @@
     :model="registerForm"
     class="login-box"
   >
-    <el-form-item prop="phoneNumber">
-      <div class="sub-title">手机号码</div>
-      <el-input v-model="registerForm.phoneNumber" placeholder="请输入手机号码">
+    <el-form-item prop="studentNo">
+      <div class="sub-title">学号(20不用输入)</div>
+      <el-input v-model="registerForm.studentNo" placeholder="请输入学号">
         <template slot="prepend"
-          >+86</template
+          >20</template
         >
       </el-input>
+    </el-form-item>
+    <el-form-item prop="studnetName">
+      <el-input
+        v-model="registerForm.studentName"
+        placeholder="请输入学生姓名"
+    ></el-input>
     </el-form-item>
 
     <el-form-item prop="checkCode">
@@ -39,12 +45,12 @@
       </el-button>
     </el-form-item>
 
-    <el-button type="warning" @click="toStnBind('registerForm')">立即注册</el-button>
+    <el-button type="warning" @click="confirmCheckCode('registerForm')">立即注册</el-button>
   </el-form>
 </template>
 
 <script>
-
+import { sendCheckCode, confirmCheckCode } from '../../../axios/api.js'
 export default {
   name: 'RegisterForm',
   data () {
@@ -53,11 +59,12 @@ export default {
       time: 0,
       btnTxt: '重新发送',
       registerForm: {
-        phoneNumber: '',
+        studentNo: '',
+        studentName: '',
         checkCode: ''
       },
       rules: {
-        phoneNumber: [
+        studentNo: [
           {
             required: true,
             message: '请输入手机号码',
@@ -65,13 +72,19 @@ export default {
           },
           {
             validator: (rule, value, callback) => {
-              const reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
-              if (!reg.test(this.registerForm.phoneNumber)) {
-                callback(new Error('手机号格式错误'))
+              const reg = 10 && /^((13|14|15|17|18|19){1}\d{8})$/
+              if (!reg.test(this.registerForm.studentNo)) {
+                callback(new Error('学号格式错误'))
               } else {
                 callback()
               }
             }
+          }
+        ],
+        studentName: [
+          {
+            required: true,
+            message: '请输入学生姓名'
           }
         ],
         checkCode: [
@@ -85,26 +98,40 @@ export default {
     }
   },
   methods: {
-    // 手机发送验证码
+    // 发送验证码
     sendCode: function () {
-      const reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
-      if (!reg.test(this.registerForm.phoneNumber)) {
+      const reg = 10 && /^((13|14|15|17|18|19){1}\d{8})$/
+      if (!reg.test(this.registerForm.studentNo)) {
         this.$message({
-          message: '请输入正确的手机号码',
+          message: '请输入正确的学号',
           center: true
         })
         return false
       } else {
-        this.$message({
-          message: '发送成功',
-          type: 'success',
-          center: true
-        })
-        this.time = 60
-        this.disabled = true
-        this.timer()
+        let data = {
+          studentNo: this.registerForm.studentNo,
+          studentName: this.registerForm.studentName
+        }
+        sendCheckCode(data).then(
+          (result) => {
+            if (!result) {
+              console.log('返回了null')
+              this.time = 60
+              this.disabled = true
+              this.timer()
+            } else {
+              console.log(result)
+              this.$message({
+                message: '发送成功，请进入教务在线的短信平台查看',
+                type: 'success',
+                center: true
+              })
+            }
+          }
+        )
       }
     },
+
     // 倒计时
     timer: function () {
       if (this.time > 0) {
@@ -117,10 +144,27 @@ export default {
         this.disabled = false
       }
     },
-    toStnBind: function (formName) {
+    confirmCheckCode: function (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$emit('toStnBind')
+          let data = {
+            studentNo: '20' + this.registerForm.studentNo,
+            checkCode: this.registerForm.checkCode
+          }
+          confirmCheckCode(data).then(
+            result => {
+              // console.log('result:::::' + result)
+              if (result.code === 2100) {
+                console.log('验证码正确')
+                this.$emit('toSetPassword', data.studentNo)
+              } else if (result === 'Error: timeout of 20000ms exceeded') {
+                this.$message({
+                  message: '发送失败，网络错误',
+                  center: true
+                })
+              }
+            }
+          )
         } else {
           return false
         }

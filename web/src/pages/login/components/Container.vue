@@ -4,15 +4,15 @@
       <div class="formHeader">
 
         <el-row  size="small">
-          <el-button type="text" :disabled=show :style=loginAccountBtnStyl @click="changeLogin('account')">学号登录</el-button><label style="font-size: 24px; color: #e0e0e0">|</label>
-          <el-button type="text" :disabled=!show :style=loginCodeBtnStyl @click="changeLogin('wechat')">手机号登录</el-button>
+          <el-button type="text" :style=loginAccountBtnStyl >用户登录</el-button>
+          <!-- <el-button type="text" :disabled=!show :style=loginCodeBtnStyl @click="changeLogin('wechat')">手机号登录</el-button> -->
         </el-row>
-        <transition name="el-zoom-in-center" >
-          <account-login v-show="show"></account-login>
-        </transition>
-        <transition name="el-zoom-in-center"  v-show="!show">
+        <!-- <transition name="el-zoom-in-center" > -->
+        <account-login v-show="show"></account-login>
+        <!-- </transition> -->
+        <!-- <transition name="el-zoom-in-center"  v-show="!show">
           <phone-login v-show="!show" ></phone-login>
-        </transition>
+        </transition> -->
 
       </div>
     </div>
@@ -21,19 +21,14 @@
 <script>
 import loginBg from '../../../common/images/login-bg.jpg'
 import FadeAnimation from '../../../common/fade/FadeAnimation'
-import PhoneLogin from '../components/PhoneLogin'
+// import PhoneLogin from '../components/PhoneLogin'
 import AccountLogin from '../components/AccountLogin'
 export default {
   name: 'HomeContainer',
   data () {
     return {
-      active: true,
-      value2: true,
       show: true,
-      loginType: AccountLogin,
       loginBgUrl: loginBg,
-      animationIn: 'animated flipInY',
-      animationOut: 'animated flipOutY',
       styleObj: {
         height: '588px',
         width: '100%',
@@ -45,24 +40,15 @@ export default {
       loginAccountBtnStyl: {
         fontSize: '24px',
         marginRight: '25px'
-
-      },
-      loginCodeBtnStyl: {
-        fontSize: '24px',
-        marginLeft: '25px'
       }
     }
   },
   components: {
     FadeAnimation: FadeAnimation,
-    AccountLogin: AccountLogin,
-    PhoneLogin: PhoneLogin
+    AccountLogin: AccountLogin
+    // PhoneLogin: PhoneLogin
   },
   methods: {
-    changeLogin: function (type) {
-      this.show = !this.show
-    }
-
   }
 }
 </script>

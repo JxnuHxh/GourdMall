@@ -21,7 +21,7 @@ export default {
     return {
       percentage: 0,
       colors: '#5cb87a',
-      time: 15
+      time: 20
     }
   },
   mounted: function () {
@@ -43,10 +43,10 @@ export default {
     timer: function () {
       if (this.time > 0) {
         this.time--
-        this.percentage += 100 / 15
+        this.percentage += 5
         setTimeout(this.timer, 1000)
       } else {
-        this.$router.push('/login')
+        this.toLogin()
       }
     },
     toLogin: function () {

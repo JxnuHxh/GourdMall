@@ -4,7 +4,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -23,3 +23,15 @@ export default new Router({
     }
   ]
 })
+// 挂载路由守卫
+router.beforeEach((to, from, next) => {
+  console.log(to.path)
+  if (to.path === '/login' || to.path === '/register' || to.path === '/forget' || to.path === '/admin' || to.path === '/') return next()
+  // 获取token
+  const token = window.localStorage.getItem('token')
+  if (!token) return next('/login')
+  next()
+}
+)
+
+export default router

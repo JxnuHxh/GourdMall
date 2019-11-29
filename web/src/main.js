@@ -10,7 +10,8 @@ import Axios from 'axios'
 // import VueResource from 'vue-resource'
 
 // Vue.prototype = Axios
-
+import Bus from '../src/assets/js/eventBus.js'
+Vue.prototype.$bus = Bus
 Vue.use(ElementUI)
 Vue.use(Animate)
 Vue.prototype.$axios = Axios
