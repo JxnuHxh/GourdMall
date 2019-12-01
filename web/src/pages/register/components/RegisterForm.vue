@@ -109,7 +109,7 @@ export default {
         return false
       } else {
         let data = {
-          studentNo: this.registerForm.studentNo,
+          studentNo: 20 + this.registerForm.studentNo,
           studentName: this.registerForm.studentName
         }
         sendCheckCode(data).then(
