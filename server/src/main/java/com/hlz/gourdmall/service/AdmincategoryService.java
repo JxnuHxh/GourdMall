@@ -5,6 +5,7 @@ import com.hlz.gourdmall.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -14,8 +15,9 @@ import java.util.List;
  */
 @Service
 public class AdmincategoryService {
-    @Autowired
+   @Resource
     private AdminCategoryMapper adminCategory;
+
     public List<Category> selectAllCategory(){
         List<Category> list= adminCategory.selectAllCategory();
         return list;
