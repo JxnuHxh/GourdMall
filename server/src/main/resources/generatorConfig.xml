@@ -32,7 +32,8 @@
         <table tableName="check_code" domainObjectName="CheckCode"/>
         <table tableName="token" domainObjectName="Token"/>
         <table tableName="category" domainObjectName="Category"/>
-        <table tableName="product" domainObjectName="Product"></table>
-        <table tableName="orders" domainObjectName="Order"></table>
+        <table tableName="product" domainObjectName="Product"/>
+        <table tableName="orders" domainObjectName="Order"/>
+        <table tableName="orderitem" domainObjectName="OrderItem"/>
     </context>
 </generatorConfiguration>
