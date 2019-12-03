@@ -33,5 +33,6 @@
         <table tableName="token" domainObjectName="Token"/>
         <table tableName="category" domainObjectName="Category"/>
         <table tableName="product" domainObjectName="Product"></table>
+        <table tableName="orders" domainObjectName="Order"></table>
     </context>
 </generatorConfiguration>

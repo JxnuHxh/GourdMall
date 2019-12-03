@@ -20,10 +20,11 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/admin")
+@ResponseBody
 public class AdminController {
     @Autowired
    private AdmincategoryService admincategoryService;
-    @ResponseBody
+
     @PostMapping("/selectAllCategory")
     public  List<Category> selectAllCategory(){
 
@@ -31,6 +32,4 @@ public class AdminController {
 
         return list;
     }
-
-
 }
