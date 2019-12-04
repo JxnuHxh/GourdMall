@@ -18,6 +18,10 @@ public enum ResultCode {
     PASSWORD_SET_FAIL(4200, "密码设置失败"),
     LOGIN_SUCCESS(2300, "登录成功"),
     LOGIN_FAIL(4300, "登录失败"),
+    LIST_USER_SUCCESS(2500, "获取用户列表成功"),
+    LIST_USER_FAIL(4600, "获取用户列表失败"),
+    PRODUCT_FIND_SUCCESS(2400, "商品查询成功"),
+    PRODUCT_FIND_FAIL(4500, "商品查询失败"),
     ;
 
     private Integer code;

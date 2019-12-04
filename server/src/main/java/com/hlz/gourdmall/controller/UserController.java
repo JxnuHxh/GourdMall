@@ -1,12 +1,15 @@
 package com.hlz.gourdmall.controller;
 
+import com.github.pagehelper.Page;
 import com.hlz.gourdmall.enums.ResultCode;
 import com.hlz.gourdmall.dto.Result;
 import com.hlz.gourdmall.model.User;
 import com.hlz.gourdmall.service.UserService;
+import com.hlz.gourdmall.util.Page2Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -120,5 +123,17 @@ public class UserController {
             result = new Result(ResultCode.LOGIN_FAIL, null);
         }
         return result;
+    }
+
+    @Autowired
+    private Page2Data page2Data;
+
+    @GetMapping("/listUser")
+    public Result listUser(@RequestParam(name = "pageNum", defaultValue = "1") int pageNum,
+                           @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+        Page<User> users = userService.listUser(pageNum, pageSize);
+        Map<String, Object> data = page2Data.page2Data(users);
+        System.out.println(users);
+        return new Result(ResultCode.LIST_USER_SUCCESS, data);
     }
 }
