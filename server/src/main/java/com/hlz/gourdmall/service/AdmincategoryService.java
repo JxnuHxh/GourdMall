@@ -23,4 +23,15 @@ public class AdmincategoryService {
         return list;
     }
 
+    public int deleteByPrimaryKey(){
+        return adminCategory.deleteByPrimaryKey();
+    }
+    public int insertSelective(){
+        return adminCategory.insertSelective();
+    }
+    public int updateByPrimaryKeySelective(){
+        return adminCategory.updateByPrimaryKeySelective();
+    }
+
+
 }

@@ -1,11 +1,9 @@
-CREATE TABLE `product` (
+create table product(
    `pid` varchar(32) NOT NULL,
    `pname` varchar(50) DEFAULT NULL COMMENT "商品名称",
    `market_price` double DEFAULT NULL COMMENT "市场价",
    `shop_price` double DEFAULT NULL COMMENT "商城价",
-
    `pimage` varchar(200) DEFAULT NULL COMMENT "商品图片路径",
-
    `pdate` date DEFAULT NULL COMMENT "上架时间",
    `is_hot` int(11) DEFAULT NULL COMMENT "是否热门" ,#0=不热门,1=热门
    `pdesc` varchar(255) DEFAULT NULL COMMENT "商品描述",

@@ -26,6 +26,7 @@ public class UserController {
 
     /**
      * 发送验证码
+     *
      * @param studentNo
      * @param studentName
      * @return
@@ -56,6 +57,7 @@ public class UserController {
 
     /**
      * 确认验证码
+     *
      * @param studentNo
      * @param checkCode
      * @return
@@ -79,6 +81,7 @@ public class UserController {
 
     /**
      * 设置密码
+     *
      * @param studentNo
      * @param password
      * @return
@@ -95,6 +98,7 @@ public class UserController {
 
     /**
      * 登录
+     *
      * @param studentNo
      * @param password
      * @return

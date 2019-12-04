@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public interface AdminCategoryMapper {
     List<Category> selectAllCategory();
-    int deleteCategoryById();
-    int updateCategoryById();
+    int deleteByPrimaryKey();
+    int insertSelective();
+    int updateByPrimaryKeySelective();
 }

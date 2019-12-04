@@ -23,13 +23,27 @@ import java.util.Map;
 @ResponseBody
 public class AdminController {
     @Autowired
-   private AdmincategoryService admincategoryService;
+    private AdmincategoryService admincategoryService;
 
     @PostMapping("/selectAllCategory")
-    public  List<Category> selectAllCategory(){
+    public List<Category> selectAllCategory() {
 
-        List<Category> list =admincategoryService.selectAllCategory();
-
+        List<Category> list = admincategoryService.selectAllCategory();
         return list;
+    }
+    @PostMapping("/deleteCategory")
+    public  int deleteCategoryById(){
+        int result = admincategoryService.deleteByPrimaryKey();
+        return result;
+    }
+    @PostMapping("/insertSelective")
+    public  int insertSelective(){
+    int result = admincategoryService.insertSelective();
+    return result;
+    }
+    @PostMapping("/updateById")
+    public int updateByid(){
+        int result = admincategoryService.updateByPrimaryKeySelective();
+        return result;
     }
 }
