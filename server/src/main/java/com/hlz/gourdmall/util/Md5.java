@@ -13,6 +13,7 @@ import org.springframework.util.DigestUtils;
 public class Md5 {
 
     // 从配置文件里取盐值
+
     @Value("${md5.key}")
     private String key;
 
