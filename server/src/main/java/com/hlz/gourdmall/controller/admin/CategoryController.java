@@ -18,11 +18,15 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/category")
+    @GetMapping("/listCategory")
     public Result selectAllCategory(@RequestParam(name = "pageSize", defaultValue = "1") int pageSize,
                                     @RequestParam(name = "pageNum", defaultValue = "10") int pageNum) {
         Map<String, Object> categories = categoryService.selectAllCategory(pageSize, pageNum);
-        return new Result(ResultCode.PRODUCT_FIND_SUCCESS, categories);
-
+        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, categories);
+    }
+    @GetMapping("/delete")
+    public  Result deleteByPrimaryKey(String  cid){
+        int result = categoryService.deleteByPrimaryKey(cid);
+        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, result);
     }
 }
