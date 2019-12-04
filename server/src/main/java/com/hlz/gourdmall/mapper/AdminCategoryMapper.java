@@ -1,6 +1,9 @@
 package com.hlz.gourdmall.mapper;
 
+import com.github.pagehelper.Page;
 import com.hlz.gourdmall.model.Category;
+import com.hlz.gourdmall.model.Product;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,10 +13,8 @@ import java.util.List;
  * @date: 2019/11/30
  * @description:
  */
-@Repository
 public interface AdminCategoryMapper {
-    List<Category> selectAllCategory();
-    int deleteByPrimaryKey();
-    int insertSelective();
-    int updateByPrimaryKeySelective();
+    @Select("select * from user")
+    Page<Product> selectAllCategory();
+
 }

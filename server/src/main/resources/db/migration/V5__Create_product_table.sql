@@ -1,4 +1,3 @@
-
 # CREATE TABLE `product` (
 #    `pid` varchar(32) NOT NULL,
 #    `pname` varchar(50) DEFAULT NULL COMMENT "商品名称",
@@ -16,8 +15,8 @@
 #    KEY `product_fk_0001` (`cid`),
 #    CONSTRAINT `product_fk_0001` FOREIGN KEY (`cid`) REFERENCES `category` (`cid`)
 #  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-create table product
-(
+ create table product
+ (
     pid varchar(32) not null,
     pname varchar(50) default null null,
     market_price double default null null,

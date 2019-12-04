@@ -1,4 +1,3 @@
-#
 # CREATE TABLE `orders` (
 #    `oid` varchar(32) NOT NULL,
 #    `ordertime` datetime DEFAULT NULL comment "下单时间",
@@ -23,8 +22,7 @@ create table orders
     name varchar(20) default null null,
     telephone varchar(20) default null null,
     uid bigint null,
-    constraint orders_pk
-        primary key (oid),
+    constraint orders_pk primary key (oid),
     constraint orders_user_uid_fk
         foreign key (uid) references user (uid)
 );
