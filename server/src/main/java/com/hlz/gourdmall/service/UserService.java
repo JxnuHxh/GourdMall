@@ -1,7 +1,10 @@
 package com.hlz.gourdmall.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.hlz.gourdmall.mapper.CheckCodeMapper;
 import com.hlz.gourdmall.mapper.TokenMapper;
+import com.hlz.gourdmall.mapper.UserExtMapper;
 import com.hlz.gourdmall.mapper.UserMapper;
 import com.hlz.gourdmall.model.*;
 import com.hlz.gourdmall.util.Md5;
@@ -38,6 +41,9 @@ public class UserService {
 
     @Resource
     private TokenMapper tokenMapper;
+
+    @Resource
+    private UserExtMapper userExtMapper;
 
     /**
      * 通过学号查找学生
@@ -164,5 +170,11 @@ public class UserService {
         record.setCreateTime(new Date());
         tokenMapper.insert(record);
         return tokenStr;
+    }
+
+    public Page<User> listUser(int pageNum, int pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        Page<User> users = userExtMapper.listUser();
+        return users;
     }
 }

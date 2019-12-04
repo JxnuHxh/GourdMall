@@ -81,9 +81,9 @@ CREATE TABLE `category` (
    `pimage` varchar(200) DEFAULT NULL COMMENT "商品图片路径",	   
    
    `pdate` date DEFAULT NULL COMMENT "上架时间",   
-   `is_hot` int(11) DEFAULT NULL COMMENT "是否热门" ,#0=不热门,1=热门    
+   `is_hot` int(11) DEFAULT NULL COMMENT "是否热门" ,# 0=不热门,1=热门    
    `pdesc` varchar(255) DEFAULT NULL COMMENT "商品描述",    
-   `pflag` int(11) DEFAULT 0 COMMENT "商品标记 ",	#0=未下架(默认值),1=已经下架    
+   `pflag` int(11) DEFAULT 0 COMMENT "商品标记 ",	# 0=未下架(默认值),1=已经下架    
    `cid` varchar(32) DEFAULT NULL COMMENT "分类id",	 	   
    PRIMARY KEY (`pid`),    
    KEY `product_fk_0001` (`cid`),   
@@ -96,7 +96,7 @@ CREATE TABLE `category` (
    `ordertime` datetime DEFAULT NULL comment "下单时间",	     
    `total` double DEFAULT NULL comment "总价",   
    `state` int(11) DEFAULT NULL comment "订单状态",  	      
-   			#1=未付款;2=已付款,未发货;3=已发货,没收货;4=收货,订单结束   
+   			# 1=未付款;2=已付款,未发货;3=已发货,没收货;4=收货,订单结束   
    `address` varchar(30) DEFAULT NULL comment "收获地址",   
    `name` varchar(20) DEFAULT NULL comment "收货人",    
    `telephone` varchar(20) DEFAULT NULL comment "收货人带电话",    
