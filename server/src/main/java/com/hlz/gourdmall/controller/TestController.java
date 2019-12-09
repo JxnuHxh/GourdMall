@@ -3,12 +3,15 @@ package com.hlz.gourdmall.controller;
 import com.hlz.gourdmall.util.SendCheckCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,4 +38,17 @@ public class TestController {
         Map<String, String> result = sendCheckCode.sendCode(sno.trim(), sname.trim());
         return result;
     }
+    @RequestMapping("/admin")
+    @ResponseBody
+    public String admin(String studentNo, String password) {
+        List<God> gods =
+
+        Map<String, List<God>> data = new HashMap<>();
+
+        data.put("gods", gods);
+        return (data);
+    }
+}
+{
+    "gods": [god1, god2]
 }

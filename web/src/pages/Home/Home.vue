@@ -1,22 +1,32 @@
 <template>
   <div>
     <el-container>
-      <home-header  ></home-header>
-        <fixed-header id="fixed-header" :class="searchBarFixed == true ? 'isFixed' :''"></fixed-header>
+      <home-header></home-header>
+      <el-header id="header-bar">
+        <nav-bar></nav-bar>
+        <!-- Header content -->
+      </el-header>
+      <el-main>
+        <!-- Main content -->
+        <home-container></home-container>
+      </el-main>
 
-      <el-footer style=" height: 10000px"></el-footer>
+      <el-footer >
+        底部部分
+      </el-footer>
     </el-container>
   </div>
 </template>
 <script>
 import HomeHeader from './components/Header'
-import FixedHeader from './components/FixedHeader'
+import NavBar from './components/NavBar'
+import HomeContainer from './components/Container'
 export default {
   name: 'Home',
   data () {
     return {
-      show: false,
-      searchBarFixed: false
+      searchBarFixed: false,
+      componentId: ''
     }
   },
   mounted () {
@@ -24,7 +34,8 @@ export default {
   },
   components: {
     HomeHeader: HomeHeader,
-    FixedHeader: FixedHeader
+    NavBar: NavBar,
+    HomeContainer: HomeContainer
   },
   methods: {
     login: function () {
@@ -36,14 +47,10 @@ export default {
     handleScroll: function () {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       console.log('scrollTop:' + scrollTop)
-      let offsetTop = document.querySelector('#fixed-header').offsetTop + 1000
+      let offsetTop = 45
       console.log('offsetTop:' + offsetTop)
       if (scrollTop > offsetTop) {
-        this.show = true
-        this.searchBarFixed = true
       } else {
-        this.searchBarFixed = false
-        this.show = false
       }
       console.log(this.searchBarFixed)
     }
@@ -51,10 +58,23 @@ export default {
 }
 </script>
 <style scoped>
-.isFixed{
-    position:fixed;
-    background-color:#ffffff;
-    top:0;
-    z-index:999;
-  }
+.el-footer {
+  height: 1000px !important;
+}
+
+#header-bar {
+  height: 80px !important;
+  background: white;
+  box-shadow:0px 15px 10px -15px #ccc;
+  width: 100%;
+}
+.el-container {
+  background: #ededed;
+}
+#header-bar2 {
+  position: fixed
+}
+.el-main {
+  position: relative
+}
 </style>

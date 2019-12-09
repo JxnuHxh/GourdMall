@@ -2,7 +2,7 @@
 <template>
   <el-header>
     <el-row :gutter="20">
-      <el-col :offset="4" :xs="24" :sm="24" :md="24" :lg="14" :xl="14"  id="nav-bar">
+      <el-col :offset="5" :xs="24" :sm="24" :md="24" :lg="14" :xl="14"  id="nav-bar">
         <el-link :underline="false" :disabled="true">葫芦商城</el-link>
         <el-link :underline="false" >葫芦商城</el-link>
         <el-link :underline="false" >葫芦商城</el-link>
@@ -59,6 +59,7 @@
       <el-col id="user" :xs="24" :sm="24" :md="24" :lg="4" :xl="6">
       </el-col>
     </el-row>
+
   </el-header>
 </template>
 
