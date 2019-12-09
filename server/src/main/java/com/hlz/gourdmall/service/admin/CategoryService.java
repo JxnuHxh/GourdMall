@@ -41,8 +41,11 @@ public class CategoryService {
     public int insert(Category c){
         return categoryMapper.insert(c);
     }
-    public int updateByPrimaryKeySelective(Category c){
+    public int updateByPrimaryKey(Category c){
         return categoryMapper.updateByPrimaryKeySelective(c);
+    }
+    public Category selectById(String cid){
+        return categoryMapper.selectByPrimaryKey(cid);
     }
 
 
