@@ -37,17 +37,5 @@ public class TestController {
         Map<String, String> result = sendCheckCode.sendCode(sno.trim(), sname.trim());
         return result;
     }
-    @RequestMapping("/admin")
-    @ResponseBody
-    public String admin(String studentNo, String password) {
-        List<God> gods =
 
-        Map<String, List<God>> data = new HashMap<>();
-
-        data.put("gods", gods);
-        return (data);
-    }
-}
-{
-    "gods": [god1, god2]
 }
