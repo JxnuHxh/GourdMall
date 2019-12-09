@@ -48,7 +48,7 @@ public class CategoryController {
         Integer result=categoryService.updateByPrimaryKey(category);
         return  new Result(ResultCode.CATEGORY_UPDATE_SUCCESS,result);
     }
-    @GetMapping("/updateCategory")
+    @GetMapping("/selectCategory")
     public Result selectById(String cid){
         Category category=categoryService.selectById(cid);
         return  new Result(ResultCode.CATEGORY_FIND_SUCCESS,category);
