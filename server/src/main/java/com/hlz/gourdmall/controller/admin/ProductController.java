@@ -2,11 +2,8 @@ package com.hlz.gourdmall.controller.admin;
 
 
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 /**
  * @author: Hxh
@@ -14,8 +11,8 @@ import java.util.List;
  * @description:
  */
 @Controller
-@RequestMapping("/adminProduct")
-@ResponseBody
-public class AdminProduct {
+@RequestMapping("/product")
+public class ProductController {
+
 
 }

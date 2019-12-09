@@ -38,8 +38,8 @@ public class CategoryService {
     public int deleteByPrimaryKey(String cid){
         return categoryMapper.deleteByPrimaryKey(cid);
     }
-    public int insertSelective(Category c){
-        return categoryMapper.insertSelective(c);
+    public int insert(Category c){
+        return categoryMapper.insert(c);
     }
     public int updateByPrimaryKeySelective(Category c){
         return categoryMapper.updateByPrimaryKeySelective(c);

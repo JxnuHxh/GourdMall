@@ -3,7 +3,7 @@ spring:
     active: dev   # 选择开发环境
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/gourdmall?useUnicode=true&characterEncoding=UTF-8&timezone=UTC
+    url: jdbc:mysql://localhost:3306/gourdmall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: gourdmall
     password: 123456
 
