@@ -23,7 +23,10 @@ public enum ResultCode {
     PRODUCT_FIND_SUCCESS(2400, "商品查询成功"),
     PRODUCT_FIND_FAIL(4500, "商品查询失败"),
     CATEGORY_FIND_SUCCESS(2600, "分类查询成功"),
-    CATEGORY_FIND_(4600, "分类查询失败"),
+    CATEGORY_FIND_FAIL(4600, "分类查询失败"),
+    CATEGORY_ADD_SUCCESS(2601,"增加分类成功"),
+    CATEGORY_ADD_FAIL(4601,"增加分类失败")
+
     ;
 
     private Integer code;

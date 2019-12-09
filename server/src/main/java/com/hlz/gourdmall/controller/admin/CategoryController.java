@@ -32,12 +32,11 @@ public class CategoryController {
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, result);
     }
     @GetMapping("/addCategory")
-    public int addCategory(String cid,String cname ){
+    public Result addCategory(String cid,String cname ){
        Category category = null;
-
         category.setCid(cid);
         category.setCname(cname);
-     int result=categoryService.insert(category);
-return  result;
+     Integer result=categoryService.insert(category);
+        return  new Result(ResultCode.CATEGORY_ADD_SUCCESS,result);
     }
 }
