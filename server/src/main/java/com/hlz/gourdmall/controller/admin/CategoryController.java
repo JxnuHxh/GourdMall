@@ -17,8 +17,6 @@ import java.util.Map;
 @RequestMapping("/category")
 public class CategoryController {
     @Autowired
-    private Category category;
-    @Autowired
     private CategoryService categoryService;
 
     @GetMapping("/listCategory")
@@ -35,9 +33,11 @@ public class CategoryController {
     }
     @GetMapping("/addCategory")
     public int addCategory(String cid,String cname ){
+       Category category = null;
+
         category.setCid(cid);
         category.setCname(cname);
      int result=categoryService.insert(category);
-
+return  result;
     }
 }
