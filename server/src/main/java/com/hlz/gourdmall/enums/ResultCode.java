@@ -22,6 +22,9 @@ public enum ResultCode {
     LIST_USER_FAIL(4600, "获取用户列表失败"),
     PRODUCT_FIND_SUCCESS(2400, "商品查询成功"),
     PRODUCT_FIND_FAIL(4500, "商品查询失败"),
+    PRODUCT_INSTALL_SUCCESS(2401, "商品插入成功"),
+    PRODUCT_DELETE_SUCCESS(2402, "商品删除成功"),
+    PRODUCT_UPDATE_SUCCESS(2403, "商品删除成功"),
     CATEGORY_FIND_SUCCESS(2600, "分类查询成功"),
     CATEGORY_FIND_(4600, "分类查询失败"),
     ;

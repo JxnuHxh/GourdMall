@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -19,6 +21,9 @@ import java.util.Map;
  */
 @Service
 public class ProductServer {
+
+    @Resource
+    private ProductMapper productMapper;
 
     @Resource
     private ProductExtMapper productExtMapper;
@@ -33,4 +38,29 @@ public class ProductServer {
         return data;
     }
 
+    public Map<String, Object> getProductById(String id) {
+        Product product = productMapper.selectByPrimaryKey(id);
+        if (product != null) {
+            Map<String, Object> data = new HashMap<>();
+            data.put("data", product);
+            return data;
+        }
+        return null;
+    }
+
+    public boolean insert(Product product) {
+        product.setPdate(new Date());
+        int insert = productMapper.insert(product);
+        return insert > 0;
+    }
+
+    public boolean deleteProductById(String id) {
+        int ans = productMapper.deleteByPrimaryKey(id);
+        return ans > 0;
+    }
+
+    public boolean update(Product product) {
+        int ans = productMapper.updateByPrimaryKey(product);
+        return ans > 0;
+    }
 }

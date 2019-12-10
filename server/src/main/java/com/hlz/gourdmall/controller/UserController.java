@@ -6,11 +6,10 @@ import com.hlz.gourdmall.dto.Result;
 import com.hlz.gourdmall.model.User;
 import com.hlz.gourdmall.service.UserService;
 import com.hlz.gourdmall.util.Page2Data;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -22,19 +21,13 @@ import java.util.Map;
  * @date: 2019/11/23
  * @description: 用户控制层
  */
+@Api(tags = "用户接口")
 @RestController
 public class UserController {
     @Autowired
     private UserService userService;
 
-    /**
-     * 发送验证码
-     *
-     * @param studentNo
-     * @param studentName
-     * @return
-     * @throws IOException
-     */
+    @ApiOperation("发送验证码")
     @GetMapping("/sendCheckCode")
     public Result sendCheckCode(String studentNo, String studentName) throws IOException {
         User dbUser = userService.findUserBySno(studentNo);
@@ -58,13 +51,7 @@ public class UserController {
         return new Result(ResultCode.SEND_CODE_SUCCESS, data);
     }
 
-    /**
-     * 确认验证码
-     *
-     * @param studentNo
-     * @param checkCode
-     * @return
-     */
+    @ApiOperation("确认验证码")
     @PostMapping("/confirmCheckCode")
     public Result confirmCheckCode(String studentNo, String checkCode) {
         User dbUser = userService.findUserBySno(studentNo);
@@ -82,13 +69,7 @@ public class UserController {
         return result;
     }
 
-    /**
-     * 设置密码
-     *
-     * @param studentNo
-     * @param password
-     * @return
-     */
+    @ApiOperation("设置密码")
     @PostMapping("/setPassword")
     public Result setPassword(String studentNo, String password) {
         User dbUser = userService.findUserBySno(studentNo);
@@ -99,13 +80,7 @@ public class UserController {
         return new Result(ResultCode.PASSWORD_SET_SUCCESS, null);
     }
 
-    /**
-     * 登录
-     *
-     * @param studentNo
-     * @param password
-     * @return
-     */
+    @ApiOperation("登录")
     @PostMapping("/login")
     public Result login(String studentNo, String password, HttpServletRequest request) {
         User dbUser = userService.findUserBySno(studentNo);
@@ -125,15 +100,18 @@ public class UserController {
         return result;
     }
 
-    @Autowired
-    private Page2Data page2Data;
-
+    @ApiOperation("获取用户列表")
     @GetMapping("/listUser")
     public Result listUser(@RequestParam(name = "pageNum", defaultValue = "1") int pageNum,
                            @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
-        Page<User> users = userService.listUser(pageNum, pageSize);
-        Map<String, Object> data = page2Data.page2Data(users);
-        System.out.println(users);
-        return new Result(ResultCode.LIST_USER_SUCCESS, data);
+        Map<String, Object> users = userService.listUser(pageNum, pageSize);
+        return new Result(ResultCode.LIST_USER_SUCCESS, users);
+    }
+
+    @ApiOperation("删除用户")
+    @DeleteMapping("/user/{id}")
+    public Result deleteUserById(@PathVariable(name = "id") long id) {
+        boolean ans = userService.deleteUserById(id);
+        return new Result(ResultCode.SEND_CODE_SUCCESS, ans);
     }
 }
