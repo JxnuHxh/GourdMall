@@ -30,7 +30,7 @@ public class CategoryService {
 
     public Map<String, Object> selectAllCategory(int pageSize,int  pageNum){
         PageHelper.startPage(pageNum, pageSize);
-        Page<Product> categories=adminCategory.selectAllCategory();
+        Page<Category> categories=adminCategory.selectAllCategory();
         Map<String, Object> data = page2Data.page2Data(categories);
         return data;
     }

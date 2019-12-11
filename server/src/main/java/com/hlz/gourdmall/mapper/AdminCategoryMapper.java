@@ -15,6 +15,6 @@ import java.util.List;
  */
 public interface AdminCategoryMapper {
     @Select("select * from category")
-    Page<Product> selectAllCategory();
+    Page<Category> selectAllCategory();
 
 }

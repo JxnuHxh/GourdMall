@@ -33,6 +33,7 @@ public class ProductController {
     }
 
     // 根据id查找商品
+
     @ApiOperation("根据id查找商品")
     @GetMapping("/{id}")
     public Result getProductById(@PathVariable(name = "id") String id) {
