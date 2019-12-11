@@ -8,16 +8,14 @@ import com.hlz.gourdmall.mapper.UserExtMapper;
 import com.hlz.gourdmall.mapper.UserMapper;
 import com.hlz.gourdmall.model.*;
 import com.hlz.gourdmall.util.Md5;
+import com.hlz.gourdmall.util.Page2Data;
 import com.hlz.gourdmall.util.SendCheckCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author: Davion
@@ -32,6 +30,9 @@ public class UserService {
 
     @Autowired
     private Md5 md5;
+
+    @Autowired
+    private Page2Data page2Data;
 
     @Resource
     private UserMapper userMapper;
@@ -172,9 +173,15 @@ public class UserService {
         return tokenStr;
     }
 
-    public Page<User> listUser(int pageNum, int pageSize){
+    public Map<String, Object> listUser(int pageNum, int pageSize){
         PageHelper.startPage(pageNum, pageSize);
         Page<User> users = userExtMapper.listUser();
-        return users;
+        Map<String, Object> data = page2Data.page2Data(users);
+        return data;
+    }
+
+    public boolean deleteUserById(long id) {
+        int ans = userMapper.deleteByPrimaryKey(id);
+        return ans > 0;
     }
 }
