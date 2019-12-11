@@ -127,3 +127,6 @@ CREATE TABLE `orderitem` (
 > - 3、cnpm run dev
 =======
 
+   @ApiOperation(value = “接口说明”, httpMethod = “接口请求方式”, response =
+            “接口返回参数类型”, notes = “接口发布说明”；
+    

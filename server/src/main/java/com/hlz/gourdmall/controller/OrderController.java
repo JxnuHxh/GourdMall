@@ -1,4 +1,4 @@
-package com.hlz.gourdmall.controller.admin;
+package com.hlz.gourdmall.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

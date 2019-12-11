@@ -1,17 +1,15 @@
-package com.hlz.gourdmall.service.admin;
+package com.hlz.gourdmall.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.hlz.gourdmall.mapper.AdminCategoryMapper;
 import com.hlz.gourdmall.mapper.CategoryMapper;
 import com.hlz.gourdmall.model.Category;
-import com.hlz.gourdmall.model.Product;
 import com.hlz.gourdmall.util.Page2Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,6 +45,5 @@ public class CategoryService {
     public Category selectById(String cid){
         return categoryMapper.selectByPrimaryKey(cid);
     }
-
 
 }
