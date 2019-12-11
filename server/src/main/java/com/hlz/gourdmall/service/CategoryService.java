@@ -8,7 +8,6 @@ import com.hlz.gourdmall.model.Category;
 import com.hlz.gourdmall.util.Page2Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ import java.util.Map;
  */
 @Service
 public class CategoryService {
-   @Autowired
+   @Resource
     private AdminCategoryMapper adminCategory;
    @Resource
    private CategoryMapper categoryMapper;
@@ -34,10 +33,18 @@ public class CategoryService {
     }
 
     public int deleteByPrimaryKey(String cid){
-        return categoryMapper.deleteByPrimaryKey(cid);
+        Category category=categoryMapper.selectByPrimaryKey(cid);
+        if(category!=null) {
+            return categoryMapper.deleteByPrimaryKey(cid);
+        }
+        return 0;
     }
     public int insert(Category c){
+        Category category=categoryMapper.selectByPrimaryKey(c.getCid());
+        if(category!=null) {
         return categoryMapper.insert(c);
+        }
+        return 0;
     }
     public int updateByPrimaryKey(Category c){
         return categoryMapper.updateByPrimaryKeySelective(c);
