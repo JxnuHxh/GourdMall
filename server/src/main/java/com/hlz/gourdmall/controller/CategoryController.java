@@ -8,7 +8,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Map;
 
 /**
@@ -55,6 +54,12 @@ public class CategoryController {
     @GetMapping("/selectCategory")
     public Result selectById(String cid) {
         Category category = categoryService.selectById(cid);
+        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, category);
+    }
+    @ApiOperation("根据分类名")
+    @GetMapping("/selectCategoryByName")
+    public Result selectByName(String cname) {
+        Category category = categoryService.selectByCname(cname);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, category);
     }
 }

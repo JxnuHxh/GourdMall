@@ -2,7 +2,7 @@ package com.hlz.gourdmall.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.hlz.gourdmall.mapper.AdminCategoryMapper;
+import com.hlz.gourdmall.mapper.CategoryExtMapper;
 import com.hlz.gourdmall.mapper.CategoryMapper;
 import com.hlz.gourdmall.model.Category;
 import com.hlz.gourdmall.util.Page2Data;
@@ -19,9 +19,11 @@ import java.util.Map;
 @Service
 public class CategoryService {
    @Resource
-    private AdminCategoryMapper adminCategory;
+    private CategoryExtMapper adminCategory;
    @Resource
    private CategoryMapper categoryMapper;
+   @Resource
+   private CategoryExtMapper categoryExtMapper;
     @Autowired
     private Page2Data page2Data;
 
@@ -51,6 +53,9 @@ public class CategoryService {
     }
     public Category selectById(String cid){
         return categoryMapper.selectByPrimaryKey(cid);
+    }
+    public Category selectByCname(String cname){
+        return categoryExtMapper.selectCategoryByName(cname);
     }
 
 }

@@ -13,8 +13,10 @@ import java.util.List;
  * @date: 2019/11/30
  * @description:
  */
-public interface AdminCategoryMapper {
+public interface CategoryExtMapper {
     @Select("select * from category")
     Page<Category> selectAllCategory();
+    @Select("select * from category where cname=#{cname}")
+    Category selectCategoryByName(String cname);
 
 }
