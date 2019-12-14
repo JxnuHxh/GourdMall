@@ -23,7 +23,7 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>3.1.0</version>
-        </dependency>2
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.uuid</groupId>
             <artifactId>java-uuid-generator</artifactId>
