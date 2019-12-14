@@ -115,10 +115,7 @@ export default {
         sendCheckCode(data).then(
           (result) => {
             if (!result) {
-              console.log('返回了null')
-              this.time = 60
-              this.disabled = true
-              this.timer()
+
             } else {
               console.log(result)
               this.$message({
@@ -126,6 +123,10 @@ export default {
                 type: 'success',
                 center: true
               })
+              console.log('返回了null')
+              this.time = 60
+              this.disabled = true
+              this.timer()
             }
           }
         )
@@ -153,7 +154,7 @@ export default {
           }
           confirmCheckCode(data).then(
             result => {
-              // console.log('result:::::' + result)
+              console.log('result:::::' + result)
               if (result.code === 2100) {
                 console.log('验证码正确')
                 this.$emit('toSetPassword', data.studentNo)

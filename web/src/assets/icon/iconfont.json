@@ -1,0 +1,44 @@
+{
+  "id": "1459681",
+  "name": "Element_icon",
+  "font_family": "iconfont",
+  "css_prefix_text": "el-icon-ali-",
+  "description": "Gourd项目图标",
+  "glyphs": [
+    {
+      "icon_id": "566360",
+      "name": "箭头",
+      "font_class": "jiantou",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "2674472",
+      "name": "返回",
+      "font_class": "fanhui",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "2675116",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "3590935",
+      "name": "管理员",
+      "font_class": "guanliyuan",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "7342740",
+      "name": "小程序",
+      "font_class": "xiaochengxu",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    }
+  ]
+}

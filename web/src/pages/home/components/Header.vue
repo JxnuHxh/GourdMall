@@ -52,8 +52,8 @@
             <el-dropdown-item divided>退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <el-link v-if="show" :underline="false" class="right-links">注册</el-link>
-        <el-link v-if="show"  :underline="false" class="right-links">登录</el-link>
+        <el-link v-if="show" :underline="false" class="right-links" @click="Register()">注册</el-link>
+        <el-link v-if="show"  :underline="false" class="right-links" @click="Login()">登录</el-link>
 
       </el-col>
       <el-col id="user" :xs="24" :sm="24" :md="24" :lg="4" :xl="6">
@@ -91,6 +91,12 @@ export default {
     },
     handleUser () {
       this.$router.push('/login')
+    },
+    Register: function () {
+      this.$router.push('/register')
+    },
+    Login: function () {
+      this.$router.push('/login')
     }
   },
   // 生命周期 - 创建完成（可以访问当前this实例）
@@ -107,7 +113,9 @@ export default {
   updated () {}, // 生命周期 - 更新之后
   beforeDestroy () {}, // 生命周期 - 销毁之前
   destroyed () {}, // 生命周期 - 销毁完成
-  activated () {} // 如果页面有keep-alive缓存功能，这个函数会触发
+  activated () {
+    console.log('激活状态')
+  } // 如果页面有keep-alive缓存功能，这个函数会触发
 }
 </script>
 <style scoped>

@@ -108,7 +108,7 @@ export default {
                       message: '登录成功',
                       type: 'success'
                     })
-                    // console.log(result.data.token)
+                    console.log(result.data.token)
                     window.sessionStorage.setItem('token', result.data.token)
                     this.$router.push('/')
                     break

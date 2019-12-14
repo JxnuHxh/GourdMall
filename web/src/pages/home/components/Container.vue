@@ -1,24 +1,32 @@
 <template>
   <!--四个展示商品-->
-  <el-row :gutter="20">
+  <el-row :gutter="20" >
     <el-col :span="14" :offset="5">
       <carousel></carousel>
     </el-col>
     <el-col :span="14" :offset="5">
       <el-row>
-        <el-col :span="6">
+        <el-col :span="6" >
           <el-card shadow="hover" class="left">
-            <el-image :src="src"></el-image>
+              <el-image :src="src"  @click="Login()">
+                <div slot="error" class="image-slot">
+                  <i class="el-icon-picture-outline" @click="Login()"></i>
+                </div>
+              </el-image>
           </el-card>
         </el-col>
         <el-col :span="6">
           <el-card shadow="hover" class="center">
-            <el-image :src="src"></el-image>
+            <el-image :src="src"  >
+                <div slot="error" class="image-slot">
+                  <i class="el-icon-picture-outline" @click="Login()"></i>
+                </div>
+            </el-image>
           </el-card>
         </el-col>
         <el-col :span="6">
-          <el-card shadow="hover" class="center">
-          <el-image :src="src"></el-image>
+          <el-card shadow="hover" class="center" >
+              <el-image :src="src" ></el-image>
           </el-card>
         </el-col>
         <el-col :span="6">
@@ -29,7 +37,8 @@
       </el-row>
     </el-col>
     <el-col :span="14" :offset="5">
-      <el-container id="hot-sale">
+      <!-- 热门商品 -->
+      <el-container id="hot-sale" class="gods-list">
         <el-header>
           <div id="block">
             <span>热门商品</span>
@@ -100,20 +109,45 @@
             </el-col>
           </el-row>
         </el-main>
+
       </el-container>
-      <el-container id="hot-sale">
+
+      <!-- 手机首页展示 -->
+      <el-container id="phone-list" class="gods-list" style="overflow: auto;">
         <el-header>
           <div id="block">
             <span>手机</span>
-            <span id="buttons">
-              <el-button icon="el-icon-arrow-left" circle size="mini" disabled></el-button>
-              <el-button icon="el-icon-arrow-right" circle size="mini"></el-button>
-            </span>
+
           </div>
         </el-header>
         <el-main>
           <!-- Main content -->
           <el-row>
+            <el-col :span="12">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }" class="big-img">
+                <el-image :src="src"  fit="fill" >
+                  <div slot="error" class="image-slot">
+                    <i class="el-icon-picture-outline" @click="Login()"></i>
+                  </div>
+                </el-image>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }" >
+                <div @click="Login()">
+                    <el-image
+                    style="width: 200px; height: 200px"
+                    src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                    ></el-image>
+                    <div style="padding: 14px;">
+                      <span>好吃的汉堡2222</span>
+                      <div class="bottom clearfix">
+                        <span class="price">￥2,899.00</span>
+                      </div>
+                    </div>
+                </div>
+              </el-card>
+            </el-col>
             <el-col :span="6">
               <el-card shadow="hover" :body-style="{ padding: '0px' }">
                 <el-image
@@ -122,6 +156,23 @@
                   fit="cover"></el-image>
                 <div style="padding: 14px;">
                   <span>好吃的汉堡</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }" >
+                <el-image
+                  @click="refresh"
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡11111</span>
                   <div class="bottom clearfix">
                     <span class="price">￥2,899.00</span>
                   </div>
@@ -172,18 +223,413 @@
             </el-col>
           </el-row>
         </el-main>
+
+        <el-footer height="80">
+          <!-- Footer content -->
+          <div class="gods-footer" >
+            <span id="buttons">
+              <el-pagination
+                background
+                layout="prev, pager, next"
+                :total="1000">
+              </el-pagination>
+            </span>
+          </div>
+        </el-footer>
+      </el-container>
+
+      <!-- 电脑首页展示 -->
+      <el-container id="computer-list" class="gods-list" style="overflow: auto;">
+        <el-header>
+          <div id="block">
+            <span>电脑</span>
+            <span id="buttons">
+              <el-button icon="el-icon-arrow-left" circle size="mini" disabled></el-button>
+              <el-button icon="el-icon-arrow-right" circle size="mini"></el-button>
+            </span>
+          </div>
+        </el-header>
+        <el-main>
+          <!-- Main content -->
+          <el-row>
+            <el-col :span="12">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }" class="big-img">
+                <el-image :src="src"  fit="fill" >
+                  <div slot="error" class="image-slot">
+                    <i class="el-icon-picture-outline" @click="Login()"></i>
+                  </div>
+                </el-image>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }" >
+                <div @click="Login()">
+                    <el-image
+                    style="width: 200px; height: 200px"
+                    src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                    ></el-image>
+                    <div style="padding: 14px;">
+                      <span>好吃的汉堡2222</span>
+                      <div class="bottom clearfix">
+                        <span class="price">￥2,899.00</span>
+                      </div>
+                    </div>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }">
+                <el-image
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }" >
+                <el-image
+                  @click="refresh"
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡11111</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }">
+                <el-image
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }">
+                <el-image
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }">
+                <el-image
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+          </el-row>
+        </el-main>
+        <el-footer height="80">
+          <!-- Footer content -->
+          <div class="gods-footer" >
+            <span id="buttons">
+              <el-pagination
+                background
+                layout="prev, pager, next"
+                :total="1000">
+              </el-pagination>
+            </span>
+          </div>
+        </el-footer>
+      </el-container>
+
+      <!-- 家具首页展示 -->
+      <el-container id="computer-list" class="gods-list" style="overflow: auto;">
+        <el-header>
+          <div id="block">
+            <span>家具</span>
+            <span id="buttons">
+              <el-button icon="el-icon-arrow-left" circle size="mini" disabled></el-button>
+              <el-button icon="el-icon-arrow-right" circle size="mini"></el-button>
+            </span>
+          </div>
+        </el-header>
+        <el-main>
+          <!-- Main content -->
+          <el-row>
+            <el-col :span="12">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }" class="big-img">
+                <el-image :src="src"  fit="fill" >
+                  <div slot="error" class="image-slot">
+                    <i class="el-icon-picture-outline" @click="Login()"></i>
+                  </div>
+                </el-image>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }" >
+                <div @click="Login()">
+                    <el-image
+                    style="width: 200px; height: 200px"
+                    src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                    ></el-image>
+                    <div style="padding: 14px;">
+                      <span>好吃的汉堡2222</span>
+                      <div class="bottom clearfix">
+                        <span class="price">￥2,899.00</span>
+                      </div>
+                    </div>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }">
+                <el-image
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }" >
+                <el-image
+                  @click="refresh"
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡11111</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }">
+                <el-image
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }">
+                <el-image
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }">
+                <el-image
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+          </el-row>
+        </el-main>
+        <el-footer height="80">
+          <!-- Footer content -->
+          <div class="gods-footer" >
+            <span id="buttons">
+              <el-pagination
+                background
+                layout="prev, pager, next"
+                :total="1000">
+              </el-pagination>
+            </span>
+          </div>
+        </el-footer>
+      </el-container>
+
+      <!-- 服饰首页展示 -->
+      <el-container id="clothes-list" class="gods-list" style="overflow: auto;">
+        <el-header>
+          <div id="block">
+            <span>服饰</span>
+            <span id="buttons">
+              <el-button icon="el-icon-arrow-left" circle size="mini" disabled></el-button>
+              <el-button icon="el-icon-arrow-right" circle size="mini"></el-button>
+            </span>
+          </div>
+        </el-header>
+        <el-main>
+          <!-- Main content -->
+          <el-row>
+            <el-col :span="12">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }" class="big-img">
+                <el-image :src="src"  fit="fill" >
+                  <div slot="error" class="image-slot">
+                    <i class="el-icon-picture-outline" @click="Login()"></i>
+                  </div>
+                </el-image>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }" >
+                <div @click="Login()">
+                    <el-image
+                    style="width: 200px; height: 200px"
+                    src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                    ></el-image>
+                    <div style="padding: 14px;">
+                      <span>好吃的汉堡2222</span>
+                      <div class="bottom clearfix">
+                        <span class="price">￥2,899.00</span>
+                      </div>
+                    </div>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }">
+                <el-image
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }" >
+                <el-image
+                  @click="refresh"
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡11111</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }">
+                <el-image
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }">
+                <el-image
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :span="6">
+              <el-card shadow="hover" :body-style="{ padding: '0px' }">
+                <el-image
+                  style="width: 200px; height: 200px"
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  fit="cover"></el-image>
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡</span>
+                  <div class="bottom clearfix">
+                    <span class="price">￥2,899.00</span>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+          </el-row>
+        </el-main>
+        <el-footer height="80">
+          <!-- Footer content -->
+          <div class="gods-footer" >
+            <span id="buttons">
+              <el-pagination
+                background
+                layout="prev, pager, next"
+                :total="1000">
+              </el-pagination>
+            </span>
+          </div>
+        </el-footer>
       </el-container>
     </el-col>
 
   </el-row>
-
-  <!--热门商品-->
-
 </template>
 <script>
 import Carousel from './Carousel'
 export default {
   name: 'HomeContainer',
+  inject: ['reload'],
   components: {
     Carousel: Carousel
   },
@@ -197,10 +643,25 @@ export default {
   },
   watch: {},
   methods: {
+    Login: function () {
+      this.$router.push('/login')
+    },
+    Log: function () {
+      console.log('已删除')
+    },
+    refresh: function () {
+      this.reload()
+      /* eslint-disable */ 
+      
+    }
   },
   created () {
   },
   mounted () {
+    console.log('删除监听器')
+    this.reload()
+    var dom = document.getElementsByTagName("body")[0].style
+    dom.overflow = "auto"
   }
 }
 </script>
@@ -237,39 +698,62 @@ export default {
 
 }
 
-#hot-sale {
+.gods-list {
   background-color: #fafafa;
   border-radius: 5px;
   border: 1px solid;
-  border-color: #e1e1e1
+  border-color: #e1e1e1;
+  margin-top: 20px;
 }
 
-#hot-sale .el-header{
+.gods-list .el-header{
   line-height: 60px;
   border-bottom: 1px solid;
   border-color: #e1e1e1
 }
 
-#hot-sale .el-header span {
+.gods-list .el-header span {
   font-size: 18px;
   font-weight: bolder;
 }
 
-#hot-sale .el-main {
+.gods-list .el-main {
   background: #ffffff;
-
 }
 
-#hot-sale .el-card {
+.gods-list .el-card {
   margin: 5px;
   border-radius: 5px;
   height: auto;
 }
 
-#hot-sale .el-card .el-image {
+.gods-list .el-card .el-image {
   margin-top: 40px;
 }
-#buttons {
+#block #buttons {
   float: right
+}
+.big-img .el-image {
+  margin: 0px !important;
+  padding: 0px;
+  height: 319px;
+}
+.big-img {
+  height: 319px !important;
+}
+
+#phone-list {
+}
+
+#computer-list {
+}
+
+.el-footer {
+  text-align: center;
+}
+
+#hot-gods-footer {
+  height: 40px !important;
+  padding-top: 15px;
 }
 </style>

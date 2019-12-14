@@ -9,7 +9,7 @@
  可以管理订单 <br>
 - 下面是功能结构图：<br>
 
-![](docs/img/功能流程图.jpg)
+![](server/out/docs/img/功能流程图.jpg)
 
 - [接口文档](http://127.0.0.1:8888/swagger-ui.html#/)
 
