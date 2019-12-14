@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Map;
 
 /**
@@ -31,15 +32,15 @@ public class CategoryController {
         Map<String, Object> categories = categoryService.selectAllCategory(pageSize, pageNum);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, categories);
     }
+
     @ApiOperation("根据分类查询商品")
     @GetMapping("/productBycid")
     public Result selectProduct(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
-                                    @RequestParam(name = "pageNum", defaultValue = "1") int pageNum,
-                                  @RequestParam(name = "cid")  String cid  ) {
-        Map<String, Object> products = categoryService.selectProduct(pageSize, pageNum,cid);
+                                @RequestParam(name = "pageNum", defaultValue = "1") int pageNum,
+                                @RequestParam(name = "cid") String cid) {
+        Map<String, Object> products = categoryService.selectProduct(pageSize, pageNum, cid);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, products);
     }
-
 
 
     @ApiOperation("根据id删除分类")
@@ -48,12 +49,14 @@ public class CategoryController {
         int result = categoryService.deleteByPrimaryKey(cid);
         return new Result(ResultCode.CATEGORY_DELETE_SUCCESS, result);
     }
+
     @ApiOperation("增加分类")
     @PostMapping("/addCategory")
     public Result addCategory(Category category) {
         Integer result = categoryService.insert(category);
         return new Result(ResultCode.CATEGORY_ADD_SUCCESS, result);
     }
+
     @ApiOperation("更新分类")
     @PutMapping("/updateCategory")
     public Result updateCategory(Category category) {
@@ -67,6 +70,7 @@ public class CategoryController {
         Category category = categoryService.selectById(cid);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, category);
     }
+
     @ApiOperation("根据分类名")
     @GetMapping("/selectCategoryByName")
     public Result selectByName(String cname) {

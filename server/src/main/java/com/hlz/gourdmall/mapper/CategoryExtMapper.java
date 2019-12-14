@@ -20,5 +20,4 @@ public interface CategoryExtMapper {
     Category selectCategoryByName(String cname);
     @Select("select * from product where cid=#{cid}")
     Page<Product> selectProduct(String cid);
-
 }

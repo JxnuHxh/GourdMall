@@ -31,7 +31,7 @@ public class ProductService {
     @Autowired
     private Page2Data page2Data;
 
-    public Map<String, Object> listProduct(int pageNum, int pageSize){
+    public Map<String, Object> listProduct(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         Page<Product> products = productExtMapper.listProduct();
         Map<String, Object> data = page2Data.page2Data(products);
