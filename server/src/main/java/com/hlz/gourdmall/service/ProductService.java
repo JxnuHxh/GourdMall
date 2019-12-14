@@ -20,7 +20,7 @@ import java.util.Map;
  * @description:
  */
 @Service
-public class ProductServer {
+public class ProductService {
 
     @Resource
     private ProductMapper productMapper;

@@ -3,7 +3,7 @@ package com.hlz.gourdmall.controller;
 import com.hlz.gourdmall.dto.Result;
 import com.hlz.gourdmall.enums.ResultCode;
 import com.hlz.gourdmall.model.Product;
-import com.hlz.gourdmall.service.ProductServer;
+import com.hlz.gourdmall.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import java.util.Map;
 public class ProductController {
 
     @Autowired
-    private ProductServer productServer;
+    private ProductService productServer;
 
     @ApiOperation("获取商品列表")
     @GetMapping("")

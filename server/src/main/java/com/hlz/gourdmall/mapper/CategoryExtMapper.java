@@ -18,5 +18,7 @@ public interface CategoryExtMapper {
     Page<Category> selectAllCategory();
     @Select("select * from category where cname=#{cname}")
     Category selectCategoryByName(String cname);
+    @Select("select * from product where cid=#{cid}")
+    Page<Product> selectProduct(String cid);
 
 }

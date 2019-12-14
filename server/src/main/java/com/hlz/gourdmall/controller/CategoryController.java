@@ -4,6 +4,7 @@ import com.hlz.gourdmall.dto.Result;
 import com.hlz.gourdmall.enums.ResultCode;
 import com.hlz.gourdmall.model.Category;
 import com.hlz.gourdmall.service.CategoryService;
+import com.hlz.gourdmall.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+
     @ApiOperation("查询所有分类")
     @GetMapping("/listCategory")
     public Result selectAllCategory(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
@@ -29,10 +31,19 @@ public class CategoryController {
         Map<String, Object> categories = categoryService.selectAllCategory(pageSize, pageNum);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, categories);
     }
+    @ApiOperation("根据分类查询商品")
+    @GetMapping("/productBycid")
+    public Result selectProduct(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
+                                    @RequestParam(name = "pageNum", defaultValue = "1") int pageNum,
+                                  @RequestParam(name = "cid")  String cid  ) {
+        Map<String, Object> products = categoryService.selectProduct(pageSize, pageNum,cid);
+        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, products);
+    }
+
 
 
     @ApiOperation("根据id删除分类")
-    @GetMapping("/deleteCategoryById")
+    @DeleteMapping("/deleteCategoryById")
     public Result deleteByPrimaryKey(String cid) {
         int result = categoryService.deleteByPrimaryKey(cid);
         return new Result(ResultCode.CATEGORY_DELETE_SUCCESS, result);

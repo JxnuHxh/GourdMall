@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.hlz.gourdmall.mapper.CategoryExtMapper;
 import com.hlz.gourdmall.mapper.CategoryMapper;
 import com.hlz.gourdmall.model.Category;
+import com.hlz.gourdmall.model.Product;
 import com.hlz.gourdmall.util.Page2Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,5 +58,10 @@ public class CategoryService {
     public Category selectByCname(String cname){
         return categoryExtMapper.selectCategoryByName(cname);
     }
-
+    public Map<String, Object> selectProduct(int pageSize,int  pageNum,String cid){
+        PageHelper.startPage(pageNum, pageSize);
+        Page<Product> products=adminCategory.selectProduct(cid);
+        Map<String, Object> data = page2Data.page2Data(products);
+        return data;
+    }
 }
