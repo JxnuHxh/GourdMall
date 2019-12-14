@@ -1,0 +1,1 @@
+alter table user modify password varchar(256) null;
