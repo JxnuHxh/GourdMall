@@ -2,10 +2,7 @@ package com.hlz.gourdmall.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.hlz.gourdmall.mapper.CheckCodeMapper;
-import com.hlz.gourdmall.mapper.TokenMapper;
-import com.hlz.gourdmall.mapper.UserExtMapper;
-import com.hlz.gourdmall.mapper.UserMapper;
+import com.hlz.gourdmall.mapper.*;
 import com.hlz.gourdmall.model.*;
 import com.hlz.gourdmall.util.Md5;
 import com.hlz.gourdmall.util.Page2Data;
@@ -38,6 +35,8 @@ public class UserService {
     private UserMapper userMapper;
 
     @Resource
+    private TokenExtMapper tokenExtMapper;
+    @Resource
     private CheckCodeMapper checkCodeMapper;
 
     @Resource
@@ -51,6 +50,7 @@ public class UserService {
      * @param studentNo
      * @return
      */
+
     public User findUserBySno(String studentNo) {
         UserExample userExample = new UserExample();
         userExample.createCriteria()
@@ -60,6 +60,12 @@ public class UserService {
             return users.get(0);
         }
         return null;
+    }
+    public User selectUserByToken(String token){
+        Long uid=tokenExtMapper.selectUid(token);
+        User user=userMapper.selectByPrimaryKey(uid);
+        return user;
+
     }
 
     /**

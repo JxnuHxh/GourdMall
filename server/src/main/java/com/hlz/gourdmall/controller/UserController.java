@@ -25,6 +25,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @ApiOperation("获得用户信息")
+    @GetMapping("/selectUser")
+    public Result selectUser(String token){
+        User user = userService.selectUserByToken(token);
+
+        return new Result(ResultCode.LOGIN_SUCCESS, user);
+    }
+
     @ApiOperation("发送验证码")
     @GetMapping("/sendCheckCode")
     public Result sendCheckCode(String studentNo, String studentName) throws IOException {
