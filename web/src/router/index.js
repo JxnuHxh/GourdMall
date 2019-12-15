@@ -20,18 +20,33 @@ const router = new Router({
       path: '/register',
       name: 'Register',
       component: () => import('@/pages/register/Register')
+    },
+    {
+      path: '/GoodsDetails',
+      name: 'GoodsDetails',
+      component: () => import('@/pages/goods/GoodsDetails')
     }
   ]
 })
 // 挂载路由守卫
 router.beforeEach((to, from, next) => {
-  console.log(to.path)
-  if (to.path === '/login' || to.path === '/register' || to.path === '/forget' || to.path === '/admin' || to.path === '/') return next()
+  // console.log(to.path)
+
+  if (to.path === '/login' || to.path === '/register') {
+    window.sessionStorage.removeItem('token')
+    return next()
+  }
+  // if (to.path == )
+  // if (to.path === '/login' || to.path === '/register' || to.path === '/forget' || to.path === '/admin' || to.path === '/GoodsDetails' || to.path === '/') return next()
   // 获取token
-  const token = window.localStorage.getItem('token')
-  if (!token) return next('/login')
-  next()
-}
-)
+  const token = window.sessionStorage.getItem('token')
+  if (token) {
+    // console.log('已登路')
+    return next()
+  } else {
+    // console.log('未登路')
+    return next('/login')
+  }
+})
 
 export default router

@@ -1,18 +1,18 @@
 <template>
   <div >
-    <el-backtop :bottom="140" :visibility-height="20">
-        <i class="iconfont el-icon-ali-xiaochengxu"></i>
-    </el-backtop>
-    <el-backtop :bottom="90" :visibility-height="20">
-        <i class="el-icon-shopping-cart-2"></i>
-    </el-backtop>
-    <el-backtop >
+    <div id="fixed-header" v-if="fixed">
+      <fixed-header></fixed-header>
+    </div>
+    <!-- <back-to-top :custom-style="myBackToTopStyle" :visibility-height="300" :back-position="0" transition-name="fade"/> -->
+    <we-chat :custom-style="myBackToTopStyle" :visibility-height="1" :back-position="0" transition-name="fade"></we-chat>
+    <shop-cart :custom-style="shopCartStyle" :visibility-height="200" :back-position="0" transition-name="fade"></shop-cart>
+    <el-backtop :bottom="40" :visibility-height="300">
+    <!-- <i class="iconfont el-icon-ali-xiaochengxu" @mouseover="log()"></i> -->
     </el-backtop>
     <el-container>
       <home-header></home-header>
       <el-header id="header-bar">
         <nav-bar></nav-bar>
-
         <!-- Header content -->
       </el-header>
       <el-main>
@@ -29,18 +29,54 @@
 
 </template>
 <script>
-import HomeHeader from './components/Header'
-import NavBar from './components/NavBar'
+import HomeHeader from '../../common/components/Header'
+import NavBar from '../../common/components/NavBar'
 import HomeContainer from './components/Container'
-import HomeFooter from './components/Footer'
+import HomeFooter from '../../common/components/Footer'
+import FixedHeader from '../../common/components/FixedHeader'
+import BackToTop from '../../common/backtop/BackToTop'
+import ShopCart from '../../common/shopcart/ShopCart'
+import WeChat from '../../common/wechat/Wechat'
 
 export default {
   name: 'Home',
   data () {
     return {
       searchBarFixed: false,
-      componentId: ''
+      fixed: false,
+      componentId: '',
+      state: false,
+      myBackToTopStyle: {
+        right: '40px',
+        bottom: '140px',
+        width: '40px',
+        height: '40px',
+        borderRadius: '20px',
+        lineHeight: '40px', // 请保持与高度一致以垂直居中
+        background: 'white', // 按钮的背景颜色
+        'z-index': '200',
+        color: '#409eff',
+        'font-size': '20px'
+      },
+      shopCartStyle: {
+        right: '40px',
+        bottom: '90px',
+        width: '40px',
+        height: '40px',
+        borderRadius: '20px',
+        lineHeight: '40px', // 请保持与高度一致以垂直居中
+        background: 'white', // 按钮的背景颜色
+        'z-index': '200',
+        color: '#409eff',
+        'font-size': '20px'
+      }
     }
+  },
+  created () {
+    console.log('主页创建')
+    console.log(window.sessionStorage.getItem('token'))
+
+    // 进行token验证, 并且获取用户信息
   },
   mounted () {
     window.addEventListener('scroll', this.handleScroll)
@@ -49,7 +85,11 @@ export default {
     HomeHeader: HomeHeader,
     NavBar: NavBar,
     HomeContainer: HomeContainer,
-    HomeFooter: HomeFooter
+    HomeFooter: HomeFooter,
+    BackToTop: BackToTop,
+    ShopCart: ShopCart,
+    WeChat: WeChat,
+    FixedHeader: FixedHeader
   },
   methods: {
     login: function () {
@@ -60,21 +100,24 @@ export default {
     },
     handleScroll: function () {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-      console.log('scrollTop:' + scrollTop)
-      let offsetTop = 45
-      console.log('offsetTop:' + offsetTop)
+      // console.log('scrollTop:' + scrollTop)
+      let offsetTop = 145
+      // console.log('offsetTop:' + offsetTop)
       if (scrollTop > offsetTop) {
+        this.fixed = true
       } else {
+        this.fixed = false
       }
-      console.log(this.searchBarFixed)
+      // console.log(this.searchBarFixed)
+    },
+    log: function () {
+      // console.log('ssssssss')
+      window.pageYOffset = 0
     }
   }
 }
 </script>
 <style scoped>
-.el-footer {
-  /* height: 1000px !important; */
-}
 
 #header-bar {
   height: 80px !important;
@@ -95,4 +138,29 @@ export default {
   padding: 0px;
   height: 330px;
 }
+.shop-cart {
+  position: fixed;
+  z-index: 200;
+  bottom: 40px;
+  right: 40px;
+  height: 40px;
+  width: 40px;
+  background: #ededed;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 20px;
+  /* padding-top: 10px; */
+  line-height: 20px;
+}
+
+#fixed-header {
+  width: 100%;
+  height: 70px;
+  position: fixed;
+  background: #333333;
+  z-index: 20;
+  margin-top: -10px;
+  margin-bottom: -10px
+}
+
 </style>
