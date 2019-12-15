@@ -2,15 +2,18 @@ package com.hlz.gourdmall.controller;
 
 import com.hlz.gourdmall.dto.Result;
 import com.hlz.gourdmall.enums.ResultCode;
-import com.hlz.gourdmall.model.Order;
+import com.hlz.gourdmall.model.*;
 import com.hlz.gourdmall.service.CategoryService;
 import com.hlz.gourdmall.service.OrderService;
+import com.hlz.gourdmall.util.UUIDUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -44,11 +47,40 @@ public class OrderController {
         Integer data=orderService.updateOrder(order);
         return new Result(ResultCode.PRODUCT_FIND_SUCCESS, data);
     }
-    @ApiOperation("增加订单")
-    @PutMapping("/addOrder")
-    public Result addOrder(Order order){
-        Integer data =orderService.addOrder(order);
-        return new Result(ResultCode.PRODUCT_FIND_SUCCESS, data);
+    @ApiOperation("提交订单")
+    @PutMapping("/saveOrder")
+    public Result addOrder(Order order, HttpServletRequest request){
+        //确认用户登录状态
+        User user=(User)request.getSession().getAttribute("loginUser");
+        if(null==user){
+            //请在登录后下单
+            return new Result(ResultCode.PRODUCT_FIND_SUCCESS, null);
+        }
+        //获取购物车
+        Cart cart=(Cart)request.getSession().getAttribute("cart");
+        //创建订单对象,为订单对象赋值
+        order.setOid(UUIDUtils.getCode());
+        order.setOrdertime(new Date());
+        order.setTotal(cart.getTotal());
+        order.setState(1);
+        order.setUid(user.getUid());
+        //遍历购物项的同时,创建订单项,为订单项赋值
+        for (CartItem item : cart.getCartItems()) {
+            OrderItem orderItem=new OrderItem();
+            orderItem.setItemid(UUIDUtils.getCode());
+            orderItem.setQuantity(item.getNum());
+            orderItem.setTotal(item.getSubTotal());
+            orderItem.setPid(item.getProduct().getPid());
+            //设置当前的订单项属于哪个订单:程序的角度体检订单项和订单对应关系
+            orderItem.setOid(order.getOid());
+            order.getList().add(orderItem);
+        }
+        //调用业务层功能:保存订单
+        //将订单数据,用户的数据,订单下所有的订单项都传递到了service层
+        orderService.saveOrder(order);
+        //清空购物车
+        cart.clearCart();
+        return new Result(ResultCode.PRODUCT_FIND_SUCCESS, order);
     }
     @ApiOperation("删除订单")
     @DeleteMapping("/deleteOrder")

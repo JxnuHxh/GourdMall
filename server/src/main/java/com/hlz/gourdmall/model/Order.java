@@ -1,7 +1,12 @@
 package com.hlz.gourdmall.model;
 
-import java.util.Date;
+import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+@Data
 public class Order {
 
     private String oid;
@@ -21,6 +26,9 @@ public class Order {
     private String telephone;
 
     private Long uid;
+    // 程序中体现订单对象和订单项之间关系,我们再项目中的部分功能中有类似的需求:查询订单的同时还需要获取订单下所有的订单项
+
+    private List<OrderItem> list = new ArrayList();
 
     public String getOid() {
         return oid;

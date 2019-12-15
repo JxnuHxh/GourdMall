@@ -52,7 +52,7 @@ public class OrderService {
         return result;
     }
 
-    public int addOrder(Order order) {
+    public int saveOrder(Order order) {
 
         int result = orderMapper.insert(order);
         return result;

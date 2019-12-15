@@ -80,7 +80,7 @@ public class UserController {
 
     @ApiOperation("登录")
     @PostMapping("/login")
-    public Result login(String studentNo, String password) {
+    public Result login(String studentNo, String password,HttpServletRequest request) {
         User dbUser = userService.findUserBySno(studentNo);
         if (dbUser == null) {
             return new Result(ResultCode.USER_NOT_EXIST, null);
@@ -90,6 +90,7 @@ public class UserController {
         if (loginFlag) {
             String token = userService.setToken(dbUser.getUid());
             Map<String, String> tokenData = new HashMap<>();
+            request.getSession().setAttribute("loginUser", dbUser);
             tokenData.put("token", token);
             result = new Result(ResultCode.LOGIN_SUCCESS, tokenData);
         } else {
