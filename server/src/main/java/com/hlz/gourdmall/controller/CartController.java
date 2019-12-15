@@ -11,9 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -30,10 +28,9 @@ import java.util.Map;
 public class CartController {
     @Autowired
     private CartService cartService;
-
-    @ApiOperation("获取购物车")
-    @GetMapping("/listCart")
-    public Result listCart(HttpServletRequest request) {
+    @ApiOperation("增加购物车")
+    @GetMapping("/addToCart")
+    public Result addCart(String pid, int num, HttpServletRequest request) {
 
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         if (null == cart) {
@@ -43,15 +40,30 @@ public class CartController {
         }
         //如果获取到,使用即可
         //获取到商品id,数量
-        String pid = request.getParameter("pid");
-        int num = Integer.parseInt(request.getParameter("quantity"));
-        Product product = cartService.getProductById(pid);
+        Product product = cartService.getProductId(pid);
         //获取到待购买的购物项
         CartItem cartItem = new CartItem();
         cartItem.setNum(num);
         cartItem.setProduct(product);
         //调用购物车上的方法
         cart.addCartItemToCar(cartItem);
+        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
+    }
+
+    @ApiOperation("根据商品id删除购物车的商品")
+    @DeleteMapping("deleteCart")
+    public Result deleteCart(String pid, HttpServletRequest request) {
+        Cart cart = (Cart) request.getSession().getAttribute("cart");
+        //调用购物车删除购物项方法
+        cart.removeCartItem(pid);
+        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
+    }
+    @ApiOperation("清空购物车")
+    @DeleteMapping("clearCart")
+    public Result clearCart( HttpServletRequest request) {
+        Cart cart = (Cart) request.getSession().getAttribute("cart");
+        //调用购物车删除购物项方法
+        cart.clearCart();
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
     }
 }
