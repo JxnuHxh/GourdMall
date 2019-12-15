@@ -4,6 +4,7 @@ import com.hlz.gourdmall.model.Token;
 import com.hlz.gourdmall.model.TokenExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface TokenMapper {
     /**
