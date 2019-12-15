@@ -2,7 +2,6 @@ package com.hlz.gourdmall.dto;
 
 import com.hlz.gourdmall.enums.ResultCode;
 import lombok.Data;
-
 import java.io.Serializable;
 
 /**
