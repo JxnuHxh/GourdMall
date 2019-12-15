@@ -11,22 +11,23 @@ const instance = axios.create({
  *  拦截请求Resquest
  */
 instance.interceptors.request.use(
-  config => {
-    console.log(config)
-    config.withCredentials = true // 允许携带token ,这个是解决跨域产生的相关问题
-    let token = sessionStorage.getItem('token')
-    console.log(token)
-    if (token) {
-      config.headers = {
-        'access-token': token,
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    }
-    return config
-  },
-  error => {
-    return Promise.reject(error)
-  }
+    config => {	  console.log(config)
+      console.log('ssssssssssssssssssssssssssssssssssssssss')	  console.log('ssssssssssssssssssssssssssssssssssssssss')
+      config.withCredentials = true // 允许携带token ,这个是解决跨域产生的相关问题	  config.withCredentials = true // 允许携带token ,这个是解决跨域产生的相关问题
+      let token = sessionStorage.getItem('token')	  let token = sessionStorage.getItem('token')
+      console.log(token)	  console.log(token)
+      if (token) {	  if (token) {
+        config.headers = {	    config.headers = {
+          'access-token': token	      'access-token': token,
+        }	      'Content-Type': 'application/x-www-form-urlencoded'
+      }	    }
+      return config	  }
+    },
+    error => {	  return config
+      return Promise.reject(error)	},
+    }	error => {
+  )	  return Promise.reject(error)
+}
 )
 /**
  * 拦截响应response，并做一些错误处理

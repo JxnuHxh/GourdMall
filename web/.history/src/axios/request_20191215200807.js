@@ -12,14 +12,13 @@ const instance = axios.create({
  */
 instance.interceptors.request.use(
   config => {
-    console.log(config)
+    console.log('ssssssssssssssssssssssssssssssssssssssss')
     config.withCredentials = true // 允许携带token ,这个是解决跨域产生的相关问题
     let token = sessionStorage.getItem('token')
     console.log(token)
     if (token) {
       config.headers = {
-        'access-token': token,
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'access-token': token
       }
     }
     return config

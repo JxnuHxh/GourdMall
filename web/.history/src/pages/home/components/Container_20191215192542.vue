@@ -2,7 +2,7 @@
   <!--四个展示商品-->
   <el-row :gutter="20" >
     <el-col :span="14" :offset="5">
-       <carousel></carousel>
+      <carousel></carousel>
     </el-col>
     <el-col :span="14" :offset="5">
       <el-row>
@@ -662,7 +662,7 @@ export default {
     },
     refresh: function () {
       this.reload()
-      /* eslint-disable */
+      /* eslint-disable */ 
     },
     cardenter () {
       this.card = true
@@ -776,7 +776,7 @@ export default {
   line-height: 30px;
   font-size: 10px;
   padding: 0px;
-
+  
 }
 
 .el-button-group .left {
