@@ -23,6 +23,14 @@ public class Order {
 
     private String name;
 
+    public List<OrderItem> getList() {
+        return list;
+    }
+
+    public void setList(List<OrderItem> list) {
+        this.list = list;
+    }
+
     private String telephone;
 
     private Long uid;
@@ -97,19 +105,16 @@ public class Order {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", oid=").append(oid);
-        sb.append(", ordertime=").append(ordertime);
-        sb.append(", total=").append(total);
-        sb.append(", state=").append(state);
-        sb.append(", address=").append(address);
-        sb.append(", name=").append(name);
-        sb.append(", telephone=").append(telephone);
-        sb.append(", uid=").append(uid);
-        sb.append("]");
-        return sb.toString();
+        return "Order{" +
+                "oid='" + oid + '\'' +
+                ", ordertime=" + ordertime +
+                ", total=" + total +
+                ", state=" + state +
+                ", address='" + address + '\'' +
+                ", name='" + name + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", uid=" + uid +
+                ", list=" + list +
+                '}';
     }
 }

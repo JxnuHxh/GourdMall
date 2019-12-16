@@ -8,8 +8,10 @@ import com.hlz.gourdmall.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,14 +25,19 @@ import java.util.Map;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private RedisTemplate<Object,Object> redisTemplate;
 
-
-    @ApiOperation("查询所有分类")
+    @ApiOperation("后台查询所有分类")
     @GetMapping("/listCategory")
-    public Result selectAllCategory(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
-                                    @RequestParam(name = "pageNum", defaultValue = "1") int pageNum) {
-        Map<String, Object> categories = categoryService.selectAllCategory(pageSize, pageNum);
-        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, categories);
+    public Result selectAllCategory() {
+        List<Category> categoryList= (List<Category>) redisTemplate.opsForValue().get("allCategory");
+        if(categoryList==null){
+           categoryList=categoryService.selectAllCategory();
+           redisTemplate.opsForValue().set("allCategory",categoryList);
+        }
+        //Map<String, Object> categories = categoryService.selectAllCategory(pageSize, pageNum);
+        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, categoryList);
     }
 
     @ApiOperation("根据分类查询商品")
@@ -41,7 +48,6 @@ public class CategoryController {
         Map<String, Object> products = categoryService.selectProduct(pageSize, pageNum, cid);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, products);
     }
-
 
     @ApiOperation("根据id删除分类")
     @DeleteMapping("/deleteCategoryById")
@@ -74,6 +80,7 @@ public class CategoryController {
     @ApiOperation("根据分类名")
     @GetMapping("/selectCategoryByName")
     public Result selectByName(String cname) {
+
         Category category = categoryService.selectByCname(cname);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, category);
     }

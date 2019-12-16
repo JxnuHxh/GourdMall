@@ -14,8 +14,6 @@ import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author: Hxh
@@ -31,7 +29,7 @@ public class CartController {
     @ApiOperation("增加购物车")
     @GetMapping("/addToCart")
     public Result addCart(String pid, int num, HttpServletRequest request) {
-
+         // System.out.println(pid+""+num);
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         if (null == cart) {
             //如果获取不到,创建购物车对象,放在session中
@@ -53,6 +51,7 @@ public class CartController {
     @ApiOperation("根据商品id删除购物车的商品")
     @DeleteMapping("deleteCart")
     public Result deleteCart(String pid, HttpServletRequest request) {
+        System.out.println(pid);
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         //调用购物车删除购物项方法
         cart.removeCartItem(pid);
