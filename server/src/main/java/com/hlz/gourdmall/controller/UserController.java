@@ -27,9 +27,11 @@ public class UserController {
 
     @ApiOperation("获得用户信息")
     @GetMapping("/selectUser")
-    public Result selectUser(String token){
+    public Result selectUser(String token) {
         User user = userService.selectUserByToken(token);
-
+        if (user == null) {
+            return new Result(ResultCode.LOGIN_FAIL, null);
+        }
         return new Result(ResultCode.LOGIN_SUCCESS, user);
     }
 
@@ -88,7 +90,7 @@ public class UserController {
 
     @ApiOperation("登录")
     @PostMapping("/login")
-    public Result login(String studentNo, String password,HttpServletRequest request) {
+    public Result login(String studentNo, String password, HttpServletRequest request) {
         User dbUser = userService.findUserBySno(studentNo);
         if (dbUser == null) {
             return new Result(ResultCode.USER_NOT_EXIST, null);
@@ -110,7 +112,7 @@ public class UserController {
     @ApiOperation("获取用户列表")
     @GetMapping("/listUser")
     public Result listUser(@RequestParam(name = "pageNum", defaultValue = "1") int pageNum,
-                           @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+                           @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
         Map<String, Object> users = userService.listUser(pageNum, pageSize);
         return new Result(ResultCode.LIST_USER_SUCCESS, users);
     }

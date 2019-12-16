@@ -6,28 +6,15 @@ spring:
     url: jdbc:mysql://localhost:3306/gourdmall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: gourdmall
     password: 123456
-
-    redis:
-      host: 127.0.0.1
-      port: 6379
-      database: 0
-      timeout: 60s
-      # 数据库连接超时时间，2.0 中该参数的类型为Duration，这里在配置的时候需要指明单位
-      # 连接池配置，2.0中直接使用jedis或者lettuce配置连接池
-      password:
-      jedis:
-        pool:
-          # 最大空闲连接数
-          max-idle: 500
-          # 最小空闲连接数
-          min-idle: 50
-          # 等待可用连接的最大时间，负数为不限制
-          max-wait:  -1s
-          # 最大活跃连接数，负数为不限制
-          max-active: -1
+  redis:
+    host: 122.51.167.18
+    port: 6379
+    password:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
 
 jxnu:
   __EVENTVALIDATION: /wEWBwLru56hBgKKhuW9AQLi98eqCwKJ37qKAQLmuZKFDgLU8OHeAQK+76jCCrelZ6RQC/9Eo4QF2JmHvGDIfLY0WhIq4napo0TAey/A

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,11 +30,11 @@ public class CategoryService {
     @Autowired
     private Page2Data page2Data;
 
-    public Map<String, Object> selectAllCategory(int pageSize, int pageNum) {
-        PageHelper.startPage(pageNum, pageSize);
-        Page<Category> categories = adminCategory.selectAllCategory();
-        Map<String, Object> data = page2Data.page2Data(categories);
-        return data;
+    public List<Category> selectAllCategory() {
+
+        List<Category> categories = adminCategory.selectAllCategory();
+
+        return categories;
     }
 
     public int deleteByPrimaryKey(String cid) {

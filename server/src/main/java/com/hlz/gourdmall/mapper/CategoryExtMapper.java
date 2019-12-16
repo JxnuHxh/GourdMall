@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface CategoryExtMapper {
     @Select("select * from category")
-    Page<Category> selectAllCategory();
+    List<Category> selectAllCategory();
     @Select("select * from category where cname=#{cname}")
     Category selectCategoryByName(String cname);
     @Select("select * from product where cid=#{cid}")
