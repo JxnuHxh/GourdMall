@@ -23,3 +23,8 @@ export const accountLogin = data => {
   // console.log(data)
   return postData('/api/login', data)
 }
+
+export const getCategories = data => {
+  console.log(data)
+  return getData('/api/category/listCategory', data)
+}
