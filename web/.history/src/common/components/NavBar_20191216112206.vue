@@ -21,14 +21,14 @@
         <el-col :span="blank" > <div style="width:10px; color: white">1</div></el-col>
         <el-col :span="2"  v-for="(product, index) in products" :key="index">
           <el-card :body-style="{ padding: '0px' }" shadow="never">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" height="150px" width="120px" class="image">
+            <img src="http://47.96.164.213/upload/2019/12/lang-600b4b189a4c42b2a86036b6e5554db5.jpg" height="150px" width="120px" class="image">
               <div style="padding: 0px;">
                 <div class="bottom clearfix" style="padding: 0px; height: 20px; margin-top: -50px;" >
                     {{product.pname}}
                 </div>
               </div>
           </el-card>
-          <span class="price">￥{{product.marketPrice}}</span>
+          <span class="price">￥{{product.marketPrice}}{{product.pimg}}</span>
         </el-col>
       </el-row>
     </fade-animation>
@@ -189,5 +189,9 @@ export default {
 
 .clearfix:hover {
   color: red
+}
+
+img {
+
 }
 </style>

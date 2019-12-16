@@ -5,7 +5,7 @@
         <div id="nav-bar-links"  >
           <el-link :underline="false" :disabled = "this.cid === '0'" @click="change('0')"><div > 首页</div></el-link>
           <span v-for="item in cateGories" v-bind:key="item.cid">
-            <el-link :underline="false" :disabled = "cid === item.cid" @click="change(item.cid)"><div @mouseenter="naventer(item)">{{item.cname}}</div></el-link>
+            <el-link :underline="false" :disabled = "cid === item.cid" @click="change(item.cid)"><div @mouseenter="naventer(item)">{{item.cid}} {{item.cname}}</div></el-link>
           </span>
           <el-input placeholder="请输入内容" v-model="search" class="inline-input" >>
           <template slot="append">
@@ -28,7 +28,7 @@
                 </div>
               </div>
           </el-card>
-          <span class="price">￥{{product.marketPrice}}</span>
+          <span class="price">￥{{product.marketPrice}} {{blank}} {{index}}</span>
         </el-col>
       </el-row>
     </fade-animation>
