@@ -4,7 +4,6 @@ import com.hlz.gourdmall.dto.Result;
 import com.hlz.gourdmall.enums.ResultCode;
 import com.hlz.gourdmall.model.Category;
 import com.hlz.gourdmall.service.CategoryService;
-import com.hlz.gourdmall.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
