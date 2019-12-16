@@ -1,14 +1,14 @@
 package com.hlz.gourdmall.controller;
 
+import com.hlz.gourdmall.dto.Cart;
+import com.hlz.gourdmall.dto.CartItem;
 import com.hlz.gourdmall.dto.Result;
 import com.hlz.gourdmall.enums.ResultCode;
 import com.hlz.gourdmall.model.*;
-import com.hlz.gourdmall.service.CategoryService;
 import com.hlz.gourdmall.service.OrderService;
 import com.hlz.gourdmall.util.UUIDUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

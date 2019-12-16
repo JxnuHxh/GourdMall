@@ -1,4 +1,4 @@
-package com.hlz.gourdmall.model;
+package com.hlz.gourdmall.dto;
 
 import java.util.Collection;
 import java.util.HashMap;

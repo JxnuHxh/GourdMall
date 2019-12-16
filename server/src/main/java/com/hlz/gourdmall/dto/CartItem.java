@@ -1,4 +1,6 @@
-package com.hlz.gourdmall.model;
+package com.hlz.gourdmall.dto;
+
+import com.hlz.gourdmall.model.Product;
 
 /**
  * @author: Hxh
