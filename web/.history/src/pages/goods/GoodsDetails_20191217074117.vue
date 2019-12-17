@@ -43,6 +43,7 @@ import BackToTop from '../../common/backtop/BackToTop'
 import ShopCart from '../../common/shopcart/ShopCart'
 import WeChat from '../../common/wechat/Wechat'
 import OverView from './components/OverView'
+import MagnifyGlass from '../../common/magnify/MagnifyGlass'
 
 export default {
   name: 'GoodsDetails',
@@ -100,7 +101,8 @@ export default {
     ShopCart: ShopCart,
     WeChat: WeChat,
     FixedHeader: FixedHeader,
-    OverView: OverView
+    OverView: OverView,
+    MagnifyGlass: MagnifyGlass
   },
   methods: {
     register: function () {

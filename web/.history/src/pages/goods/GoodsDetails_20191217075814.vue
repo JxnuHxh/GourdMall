@@ -23,7 +23,7 @@
         </el-row>
         <!-- Main content -->
         <div style="height: 1500px">
-          111
+          <magnify-glass :previewImg="data.min" :zoomImg="data.max"></magnify-glass>
         </div>
       </el-main>
 
@@ -43,11 +43,18 @@ import BackToTop from '../../common/backtop/BackToTop'
 import ShopCart from '../../common/shopcart/ShopCart'
 import WeChat from '../../common/wechat/Wechat'
 import OverView from './components/OverView'
+import MagnifyGlass from '../../common/magnify/MagnifyGlass'
 
 export default {
   name: 'GoodsDetails',
   data () {
     return {
+      data: {
+        min:
+          'https://img.alicdn.com/imgextra/i3/2857774462/TB21fgcwwNlpuFjy0FfXXX3CpXa_!!2857774462.jpg_430x430q90.jpg',
+        max:
+          'https://img.alicdn.com/imgextra/i3/2857774462/TB21fgcwwNlpuFjy0FfXXX3CpXa_!!2857774462.jpg'
+      },
       searchBarFixed: false,
       fixed: false,
       componentId: '',
@@ -100,7 +107,8 @@ export default {
     ShopCart: ShopCart,
     WeChat: WeChat,
     FixedHeader: FixedHeader,
-    OverView: OverView
+    OverView: OverView,
+    MagnifyGlass: MagnifyGlass
   },
   methods: {
     register: function () {
