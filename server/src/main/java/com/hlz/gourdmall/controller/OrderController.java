@@ -31,8 +31,10 @@ public class OrderController {
     @ApiOperation("查询所有订单")
     @GetMapping("/listOrder")
     public Result selectAllCategory(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
-                                    @RequestParam(name = "pageNum", defaultValue = "1") int pageNum) {
-        Map<String, Object> orders = orderService.selectAllOrder(pageSize, pageNum);
+                                    @RequestParam(name = "pageNum", defaultValue = "1") int pageNum,
+                                                  Integer uid) {
+
+        Map<String, Object> orders = orderService.selectAllOrder(pageSize, pageNum,uid);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, orders);
     }
     @ApiOperation("根据ID查询订单")
@@ -42,7 +44,7 @@ public class OrderController {
         return new Result(ResultCode.PRODUCT_FIND_SUCCESS, data);
     }
     @ApiOperation("更新订单")
-    @PostMapping("/updateOrder")
+    @PutMapping("/updateOrder")
     public  Result updateOrder(Order order){
         Integer data=orderService.updateOrder(order);
         return new Result(ResultCode.PRODUCT_FIND_SUCCESS, data);
@@ -59,7 +61,7 @@ public class OrderController {
         //获取购物车
         Cart cart=(Cart)request.getSession().getAttribute("cart");
         //创建订单对象,为订单对象赋值
-        order.setOid(UUIDUtils.getCode());
+        order.setOid(UUIDUtils.getId());
         order.setOrdertime(new Date());
         order.setTotal(cart.getTotal());
         order.setState(1);

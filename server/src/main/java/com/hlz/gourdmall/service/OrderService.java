@@ -30,9 +30,9 @@ public class OrderService {
     @Resource
     private OrderMapper orderMapper;
 
-    public Map<String, Object> selectAllOrder(int pageSize, int pageNum) {
+    public Map<String, Object> selectAllOrder(int pageSize, int pageNum,Integer uid) {
         PageHelper.startPage(pageNum, pageSize);
-        Page<Order> orders = orderExtMapper.selectAllOrder();
+        Page<Order> orders =  orderExtMapper.selectAllOrder();
         Map<String, Object> data = page2Data.page2Data(orders);
         return data;
     }

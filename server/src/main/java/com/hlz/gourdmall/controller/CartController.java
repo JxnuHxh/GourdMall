@@ -6,6 +6,7 @@ import com.hlz.gourdmall.dto.Cart;
 import com.hlz.gourdmall.dto.CartItem;
 import com.hlz.gourdmall.model.Product;
 import com.hlz.gourdmall.service.CartService;
+import com.hlz.gourdmall.util.UUIDUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,13 @@ public class CartController {
     private CartService cartService;
     @Autowired
     private RedisTemplate<Object,Object> redisTemplate;
+    String uuid= UUIDUtils.getId();
     
     @ApiOperation("增加购物车")
     @GetMapping("/addToCart")
-    public Result addCart(String pid, int num,String token) {
-          System.out.println(pid+" "+num+" "+token);
-        Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+token);
+    public Result addCart(String pid, int num,int uid) {
+          System.out.println(pid+" "+num+" "+uid);
+        Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+uid);
         if (null == cart) {
             cart = new Cart();
         }
@@ -46,33 +48,33 @@ public class CartController {
         //调用购物车上的方法
         cart.addCartItemToCar(cartItem);
         cart.getTotal();
-        redisTemplate.opsForValue().set("cart"+token,cart);
+        redisTemplate.opsForValue().set("cart"+uid,cart);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
     }
 
     @ApiOperation("根据商品id删除购物车的商品")
     @DeleteMapping("deleteCart")
-    public Result deleteCart(String pid, String token) {
+    public Result deleteCart(String pid, Integer uid) {
         System.out.println(pid);
-        Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+token);
+        Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+uid);
         //调用购物车删除购物项方法
         cart.removeCartItem(pid);
-        redisTemplate.opsForValue().set("cart"+token,cart);
+        redisTemplate.opsForValue().set("cart"+uid,cart);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
     }
     @ApiOperation("清空购物车")
     @DeleteMapping("clearCart")
-    public Result clearCart(String token) {
-        Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+token);
+    public Result clearCart(Integer uid) {
+        Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+uid);
         //调用购物车删除购物项方法
         cart.clearCart();
-        redisTemplate.opsForValue().set("cart"+token,cart);
+        redisTemplate.opsForValue().set("cart"+uid,cart);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
     }
     @ApiOperation("查看购物车")
     @GetMapping("allCart")
-    public Result selectCart(String token) {
-        Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+token);
+    public Result selectCart(Integer uid) {
+        Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+uid);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
     }
 }

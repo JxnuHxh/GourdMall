@@ -64,9 +64,7 @@ public class Cart implements Serializable {
 
         //遍历所有的购物项,将购物项上的小计相加
         for (CartItem cartItem : values) {
-            if(cartItem.isSelect()==true){
             total += cartItem.getSubTotal();
-            }
         }
 
         return total;

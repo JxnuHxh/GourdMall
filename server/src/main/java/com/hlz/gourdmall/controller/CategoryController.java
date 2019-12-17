@@ -26,16 +26,11 @@ public class CategoryController {
     @Autowired
     private RedisTemplate<Object,Object> redisTemplate;
 
-    @ApiOperation("后台查询所有分类")
+    @ApiOperation("查询所有分类")
     @GetMapping("/listCategory")
     public Result selectAllCategory() {
-        List<Category> categoryList= (List<Category>) redisTemplate.opsForValue().get("allCategory");
-        if(categoryList==null){
-           categoryList=categoryService.selectAllCategory();
-           redisTemplate.opsForValue().set("allCategory",categoryList);
-        }
-
-        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, categoryList);
+         List<Category>  categoryList=categoryService.selectAllCategory();
+         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, categoryList);
     }
 
     @ApiOperation("根据分类查询商品")
@@ -47,7 +42,7 @@ public class CategoryController {
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, products);
     }
 
-    @ApiOperation("根据id删除分类")
+    @ApiOperation("删除分类")
     @DeleteMapping("/deleteCategoryById")
     public Result deleteByPrimaryKey(String cid) {
         int result = categoryService.deleteByPrimaryKey(cid);
@@ -75,7 +70,7 @@ public class CategoryController {
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, category);
     }
 
-    @ApiOperation("根据分类名")
+    @ApiOperation("根据分类名查询分类")
     @GetMapping("/selectCategoryByName")
     public Result selectByName(String cname) {
         Category category = categoryService.selectByCname(cname);
