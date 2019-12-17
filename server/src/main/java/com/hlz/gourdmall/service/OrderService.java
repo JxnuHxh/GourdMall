@@ -2,18 +2,18 @@ package com.hlz.gourdmall.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.google.common.collect.Ordering;
 import com.hlz.gourdmall.mapper.OrderExtMapper;
 import com.hlz.gourdmall.mapper.OrderMapper;
-import com.hlz.gourdmall.model.Category;
-import com.hlz.gourdmall.model.Order;
+import com.hlz.gourdmall.mapper.UserMapper;
+import com.hlz.gourdmall.model.*;
 import com.hlz.gourdmall.util.Page2Data;
+import com.hlz.gourdmall.util.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PrimitiveIterator;
+import java.util.*;
 
 /**
  * @author: Hxh
@@ -28,11 +28,31 @@ public class OrderService {
     @Autowired
     private Page2Data page2Data;
     @Resource
+    private UserMapper userMapper;
+    @Resource
     private OrderMapper orderMapper;
+   public Order aboutOrder(List<OrderItem> orderItems,String telephone, String name,String address,Long uid ){
+       Order order=new Order();
+       order.setOid(UUIDUtils.getId());
+       order.setUid(uid);
+       order.setAddress(address);
+       order.setList(orderItems);
+       order.setName(name);
+       order.setTelephone(telephone);
+       order.setState(1);
+       order.setOrdertime(new Date());
+       Double total=0.0;
+       for (OrderItem item:orderItems){
+           total=item.getTotal()+total;
+       }
+       order.setTotal(total);
+       orderMapper.insert(order);
+       return order;
+   }
 
     public Map<String, Object> selectAllOrder(int pageSize, int pageNum,Integer uid) {
         PageHelper.startPage(pageNum, pageSize);
-        Page<Order> orders =  orderExtMapper.selectAllOrder();
+        Page<Order> orders =  orderExtMapper.selectAllOrder(uid);
         Map<String, Object> data = page2Data.page2Data(orders);
         return data;
     }

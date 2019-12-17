@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,17 +28,23 @@ import java.util.Map;
 public class OrderController {
     @Autowired
     private OrderService orderService;
+    @ApiOperation("提交订单")
+    @GetMapping("/saveOrder")
+    public  Result aboutOrder(List<OrderItem> orderItems, String telephone,String name,String address,Long uid){
+        Order order=orderService.aboutOrder(orderItems,telephone,name,address,uid);
+        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, order);
+    }
 
-    @ApiOperation("查询所有订单")
+    @ApiOperation("查询当前用户下所有订单")
     @GetMapping("/listOrder")
     public Result selectAllCategory(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
                                     @RequestParam(name = "pageNum", defaultValue = "1") int pageNum,
                                                   Integer uid) {
 
-        Map<String, Object> orders = orderService.selectAllOrder(pageSize, pageNum,uid);
+        Map<String, Object> orders = orderService.selectAllOrder(pageSize, pageNum, uid);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, orders);
     }
-    @ApiOperation("根据ID查询订单")
+    @ApiOperation("根据订单ID查询订单")
     @GetMapping("/{id}")
     public Result getOrderById(@PathVariable(name = "id") String id) {
         Map<String, Object> data = orderService.getOrderById(id);
@@ -49,8 +56,8 @@ public class OrderController {
         Integer data=orderService.updateOrder(order);
         return new Result(ResultCode.PRODUCT_FIND_SUCCESS, data);
     }
-    @ApiOperation("提交订单")
-    @PutMapping("/saveOrder")
+    @ApiOperation("订单详情")
+    @PutMapping("/aboutOrder")
     public Result addOrder(Order order, HttpServletRequest request){
         //确认用户登录状态
         User user=(User)request.getSession().getAttribute("loginUser");
