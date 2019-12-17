@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author: Hxh
@@ -29,13 +28,11 @@ public class CartController {
     private RedisTemplate<Object,Object> redisTemplate;
     @ApiOperation("增加购物车")
     @GetMapping("/addToCart")
-    public Result addCart(String pid, int num) {
-          System.out.println(pid+""+num);
-        Cart cart = (Cart) redisTemplate.opsForValue().get("cart");
+    public Result addCart(String pid, int num,String token) {
+          System.out.println(pid+" "+num+" "+token);
+        Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+token);
         if (null == cart) {
-            //如果获取不到,创建购物车对象,放在session中
             cart = new Cart();
-
         }
         //如果获取到,使用即可
         //获取到商品id,数量
@@ -44,27 +41,37 @@ public class CartController {
         CartItem cartItem = new CartItem();
         cartItem.setNum(num);
         cartItem.setProduct(product);
+        cartItem.setSubTotal(num*product.getShopPrice());
         //调用购物车上的方法
         cart.addCartItemToCar(cartItem);
-        redisTemplate.opsForValue().set("cart",cart);
+        cart.getTotal();
+        redisTemplate.opsForValue().set("cart"+token,cart);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
     }
 
     @ApiOperation("根据商品id删除购物车的商品")
     @DeleteMapping("deleteCart")
-    public Result deleteCart(String pid, HttpServletRequest request,String token) {
+    public Result deleteCart(String pid, String token) {
         System.out.println(pid);
-        Cart cart = (Cart) request.getSession().getAttribute("cart");
+        Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+token);
         //调用购物车删除购物项方法
         cart.removeCartItem(pid);
+        redisTemplate.opsForValue().set("cart"+token,cart);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
     }
     @ApiOperation("清空购物车")
     @DeleteMapping("clearCart")
-    public Result clearCart( HttpServletRequest request) {
-        Cart cart = (Cart) request.getSession().getAttribute("cart");
+    public Result clearCart(String token) {
+        Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+token);
         //调用购物车删除购物项方法
         cart.clearCart();
+        redisTemplate.opsForValue().set("cart"+token,cart);
+        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
+    }
+    @ApiOperation("查看购物车")
+    @GetMapping("allCart")
+    public Result selectCart(String token) {
+        Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+token);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
     }
 }

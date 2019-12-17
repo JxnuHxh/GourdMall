@@ -1,6 +1,8 @@
 package com.hlz.gourdmall.model;
 
-public class OrderItem {
+import java.io.Serializable;
+
+public class OrderItem implements Serializable {
 
     private String itemid;
 

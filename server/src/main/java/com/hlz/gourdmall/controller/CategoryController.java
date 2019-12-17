@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-
 /**
  * @author: Hxh
  * @date: 2019/12/4
@@ -35,7 +34,7 @@ public class CategoryController {
            categoryList=categoryService.selectAllCategory();
            redisTemplate.opsForValue().set("allCategory",categoryList);
         }
-        //Map<String, Object> categories = categoryService.selectAllCategory(pageSize, pageNum);
+
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, categoryList);
     }
 
@@ -79,7 +78,6 @@ public class CategoryController {
     @ApiOperation("根据分类名")
     @GetMapping("/selectCategoryByName")
     public Result selectByName(String cname) {
-
         Category category = categoryService.selectByCname(cname);
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, category);
     }

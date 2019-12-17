@@ -1,5 +1,6 @@
 package com.hlz.gourdmall.dto;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +10,7 @@ import java.util.Map;
  * @date: 2019/12/14
  * @description:
  */
-public class Cart {
+public class Cart implements Serializable {
     //总计/积分
     private double total = 0;
     //个数不确定的购物项 商品pid<===>CartItem
@@ -63,7 +64,9 @@ public class Cart {
 
         //遍历所有的购物项,将购物项上的小计相加
         for (CartItem cartItem : values) {
+            if(cartItem.isSelect()==true){
             total += cartItem.getSubTotal();
+            }
         }
 
         return total;
