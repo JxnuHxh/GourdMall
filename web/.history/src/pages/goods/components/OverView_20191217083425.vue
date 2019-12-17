@@ -171,7 +171,7 @@ export default {
 .big-pic-wrap {
   /* background: red; */
   border-radius: 5px;
-  padding-top: 120px;
+  padding-top: 125px;
 
 }
 

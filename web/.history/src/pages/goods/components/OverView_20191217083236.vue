@@ -12,8 +12,8 @@
     <el-col :span="8" id="center">
       <el-row>
         <el-col :span="24" class="big-pic-wrap">
-          <!-- <img class="big-pic" :src="this.urls[this.show]"   alt=""> -->
-          <magnify-glass class="big-pic"  :previewImg="this.urls[this.show]" :zoomImg="this.urls[this.show]"></magnify-glass>
+          <img class="big-pic" :src="this.urls[this.show]"   alt="">
+          <magnify-glass class="big-pic" width="300px" :previewImg="this.urls[this.show]" :zoomImg="this.urls[this.show]"></magnify-glass>
         </el-col>
       </el-row>
     </el-col>
@@ -171,7 +171,7 @@ export default {
 .big-pic-wrap {
   /* background: red; */
   border-radius: 5px;
-  padding-top: 120px;
+  padding-top: 145px;
 
 }
 

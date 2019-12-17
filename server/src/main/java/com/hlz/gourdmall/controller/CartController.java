@@ -26,6 +26,7 @@ public class CartController {
     private CartService cartService;
     @Autowired
     private RedisTemplate<Object,Object> redisTemplate;
+    
     @ApiOperation("增加购物车")
     @GetMapping("/addToCart")
     public Result addCart(String pid, int num,String token) {

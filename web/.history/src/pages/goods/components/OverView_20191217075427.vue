@@ -12,8 +12,8 @@
     <el-col :span="8" id="center">
       <el-row>
         <el-col :span="24" class="big-pic-wrap">
-          <!-- <img class="big-pic" :src="this.urls[this.show]"   alt=""> -->
-          <magnify-glass class="big-pic"  :previewImg="this.urls[this.show]" :zoomImg="this.urls[this.show]"></magnify-glass>
+          <!-- <img class="big-pic" :src="this.urls[this.show]" width="300px"  alt=""> -->
+
         </el-col>
       </el-row>
     </el-col>
@@ -56,12 +56,6 @@ export default {
   },
   data () {
     return {
-      data: {
-        min:
-          'https://img.alicdn.com/imgextra/i3/2857774462/TB21fgcwwNlpuFjy0FfXXX3CpXa_!!2857774462.jpg_430x430q90.jpg',
-        max:
-          'https://img.alicdn.com/imgextra/i3/2857774462/TB21fgcwwNlpuFjy0FfXXX3CpXa_!!2857774462.jpg'
-      },
       num: 1,
       show: 0,
       urls: [
@@ -171,7 +165,7 @@ export default {
 .big-pic-wrap {
   /* background: red; */
   border-radius: 5px;
-  padding-top: 120px;
+  padding-top: 145px;
 
 }
 
