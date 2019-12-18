@@ -64,9 +64,10 @@ public class Cart implements Serializable {
 
         //遍历所有的购物项,将购物项上的小计相加
         for (CartItem cartItem : values) {
-            total += cartItem.getSubTotal();
+            if(cartItem.isSelect()) {
+                total += cartItem.getSubTotal();
+            }
         }
-
         return total;
     }
 
@@ -78,7 +79,6 @@ public class Cart implements Serializable {
     public Map<String, CartItem> getMap() {
         return map;
     }
-
 
     public void setMap(Map<String, CartItem> map) {
         this.map = map;

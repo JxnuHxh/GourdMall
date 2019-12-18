@@ -11,8 +11,8 @@ import org.apache.ibatis.annotations.Select;
  * @description:
  */
 public  interface OrderExtMapper {
-//    @Select("select * from orders")
-//    Page<Order> selectAllOrder();
+    @Select("select * from orders")
+    Page<Order> selectAllOrders();
 
     @Select("select * from orders where uid=#{uid}")
     Page<Order> selectAllOrder(Integer uid);

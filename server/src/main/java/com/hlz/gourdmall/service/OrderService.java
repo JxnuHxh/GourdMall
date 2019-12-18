@@ -31,6 +31,13 @@ public class OrderService {
     private UserMapper userMapper;
     @Resource
     private OrderMapper orderMapper;
+
+    public Map<String, Object> allOrder(int pageSize, int pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        Page<Order> orders =  orderExtMapper.selectAllOrders();
+        Map<String, Object> data = page2Data.page2Data(orders);
+        return data;
+    }
    public Order aboutOrder(List<OrderItem> orderItems,String telephone, String name,String address,Long uid ){
        Order order=new Order();
        order.setOid(UUIDUtils.getId());

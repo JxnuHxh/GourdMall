@@ -6,7 +6,6 @@ import com.hlz.gourdmall.dto.Cart;
 import com.hlz.gourdmall.dto.CartItem;
 import com.hlz.gourdmall.model.Product;
 import com.hlz.gourdmall.service.CartService;
-import com.hlz.gourdmall.util.UUIDUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +26,13 @@ public class CartController {
     private CartService cartService;
     @Autowired
     private RedisTemplate<Object,Object> redisTemplate;
-    String uuid= UUIDUtils.getId();
     
-    @ApiOperation("增加购物车")
+    @ApiOperation("增加商品到购物车")
     @GetMapping("/addToCart")
     public Result addCart(String pid, int num,int uid) {
           System.out.println(pid+" "+num+" "+uid);
         Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+uid);
-        if (null == cart) {
+        if (null == cart.getCartItems()) {
             cart = new Cart();
         }
         //如果获取到,使用即可
