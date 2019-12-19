@@ -30,7 +30,7 @@ public class OrderController {
     @GetMapping("/saveOrder")
     public  Result aboutOrder(List<OrderItem> orderItems, String telephone,String name,String address,Long uid){
         Order order=orderService.aboutOrder(orderItems,telephone,name,address,uid);
-        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, order);
+        return new Result(ResultCode.ORDER_ADD_SUCCESS, order);
     }
 
     @ApiOperation("查询当前用户下所有订单")
@@ -40,26 +40,26 @@ public class OrderController {
                                                   Integer uid) {
 
         Map<String, Object> orders = orderService.selectAllOrder(pageSize, pageNum, uid);
-        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, orders);
+        return new Result(ResultCode.ORDER_FIND_SUCCESS, orders);
     }
     @ApiOperation("根据订单ID查询订单")
     @GetMapping("/{id}")
     public Result getOrderById(@PathVariable(name = "id") String id) {
         Map<String, Object> data = orderService.getOrderById(id);
-        return new Result(ResultCode.PRODUCT_FIND_SUCCESS, data);
+        return new Result(ResultCode.ORDER_FIND_SUCCESS, data);
     }
     @ApiOperation("更新订单")
     @PutMapping("/updateOrder")
     public  Result updateOrder(Order order){
         Integer data=orderService.updateOrder(order);
-        return new Result(ResultCode.PRODUCT_FIND_SUCCESS, data);
+        return new Result(ResultCode.ORDER_FIND_SUCCESS, data);
     }
 
     @ApiOperation("删除订单")
     @DeleteMapping("/deleteOrder")
-    public  Result deleteOrder(String id){
-        Integer data=orderService.deleteOrder(id);
-        return new Result(ResultCode.PRODUCT_FIND_SUCCESS, data);
+    public  Result deleteOrder(String oid){
+        Integer data=orderService.deleteOrder(oid);
+        return new Result(ResultCode.ORDER_FIND_SUCCESS, data);
     }
     @ApiOperation("后台查询所有订单")
     @GetMapping("/allOrder")
@@ -67,6 +67,6 @@ public class OrderController {
                             @RequestParam(name = "pageNum", defaultValue = "1") int pageNum
                             ){
         Map<String, Object> orders = orderService.allOrder(pageSize, pageNum);
-        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, orders);
+        return new Result(ResultCode.ORDER_FIND_SUCCESS, orders);
     }
 }

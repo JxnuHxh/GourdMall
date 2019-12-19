@@ -47,7 +47,7 @@ public class CartController {
         cart.addCartItemToCar(cartItem);
         cart.getTotal();
         redisTemplate.opsForValue().set("cart"+uid,cart);
-        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
+        return new Result(ResultCode.CART_ADD_SUCCESS, cart);
     }
 
     @ApiOperation("根据商品id删除购物车的商品")
@@ -58,7 +58,7 @@ public class CartController {
         //调用购物车删除购物项方法
         cart.removeCartItem(pid);
         redisTemplate.opsForValue().set("cart"+uid,cart);
-        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
+        return new Result(ResultCode.CART_DELETE_SUCCESS, cart);
     }
     @ApiOperation("清空购物车")
     @DeleteMapping("clearCart")
@@ -67,12 +67,12 @@ public class CartController {
         //调用购物车删除购物项方法
         cart.clearCart();
         redisTemplate.opsForValue().set("cart"+uid,cart);
-        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
+        return new Result(ResultCode.CART_DELETE_SUCCESS, cart);
     }
     @ApiOperation("查看购物车")
     @GetMapping("allCart")
     public Result selectCart(Integer uid) {
         Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+uid);
-        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, cart);
+        return new Result(ResultCode.CART_SELECT_SUCCESS, cart);
     }
 }

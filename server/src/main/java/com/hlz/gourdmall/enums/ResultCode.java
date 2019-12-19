@@ -29,10 +29,16 @@ public enum ResultCode {
     CATEGORY_FIND_FAIL(4601, "分类查询失败"),
     CATEGORY_ADD_SUCCESS(2601,"增加分类成功"),
     CATEGORY_ADD_FAIL(4601,"增加分类失败"),
-    CATEGORY_DELETE_FAIL(4602,"删除分类失败"),
+    CATEGORY_DELETE_FAIL(4602,"删除失败！该分类下有商品，请先删除该分类下商品"),
     CATEGORY_DELETE_SUCCESS(2602,"删除分类成功"),
     CATEGORY_UPDATE_SUCCESS(2603,"修改分类成功"),
-    CATEGORY_UPDATE_(4603,"修改分类失败")
+    CATEGORY_UPDATE_(4603,"修改分类失败"),
+    CART_ADD_SUCCESS(2604,"商品添加成功"),
+    CART_DELETE_SUCCESS(2605,"商品删除成功"),
+    CART_SELECT_SUCCESS(2606,"购物车查询成功"),
+    ORDER_ADD_SUCCESS(2607,"订单提交成功"),
+    ORDER_FIND_SUCCESS(2608,"查询成功"),
+    ORDER_PAY(2609,"订单支付")
     ;
 
     private Integer code;
