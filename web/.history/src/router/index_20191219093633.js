@@ -24,7 +24,7 @@ const router = new Router({
     {
       path: '/products',
       name: 'Products',
-      component: () => import('@/pages/products/Products')
+      component: () => import('@/pages/cart/Cart')
     },
     {
       path: '/goodsdetails',

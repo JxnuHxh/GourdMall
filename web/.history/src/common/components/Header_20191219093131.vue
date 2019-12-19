@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <el-header style="border-radius: 0px; background: #333333">
-    <el-row >
+    <el-row :gutter="20">
       <el-col :offset="5" :xs="24" :sm="24" :md="24" :lg="14" :xl="14"  id="nav-bar">
         <el-link :underline="false" :disabled="true">葫芦商城</el-link>
         <el-link :underline="false" ></el-link>
