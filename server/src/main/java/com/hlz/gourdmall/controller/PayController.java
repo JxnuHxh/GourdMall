@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/pay")
 public class PayController {
     @ApiOperation("订单支付")
-    @GetMapping("allCart")
+    @GetMapping("/toPay")
     public Result selectCart(Double money) {
        String message="你需要支付"+money;
-        return new Result(ResultCode.CATEGORY_FIND_SUCCESS, message);
+        return new Result(ResultCode.ORDER_PAY, message);
     }
 }

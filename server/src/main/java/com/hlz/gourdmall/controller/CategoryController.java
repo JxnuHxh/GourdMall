@@ -29,7 +29,11 @@ public class CategoryController {
     @ApiOperation("查询所有分类")
     @GetMapping("/listCategory")
     public Result selectAllCategory() {
-         List<Category>  categoryList=categoryService.selectAllCategory();
+         List<Category>  categoryList=(List<Category>)redisTemplate.opsForValue().get("categoryList");
+         if(categoryList==null){
+             categoryList= categoryService.selectAllCategory();
+             redisTemplate.opsForValue().set("categoryList",categoryList);
+         }
          return new Result(ResultCode.CATEGORY_FIND_SUCCESS, categoryList);
     }
 
@@ -46,6 +50,11 @@ public class CategoryController {
     @DeleteMapping("/deleteCategoryById")
     public Result deleteByPrimaryKey(String cid) {
         int result = categoryService.deleteByPrimaryKey(cid);
+        List<Category> categoryList= categoryService.selectAllCategory();
+        redisTemplate.opsForValue().set("categoryList",categoryList);
+        if(result==0){
+            return new Result(ResultCode.CATEGORY_DELETE_FAIL, null);
+        }
         return new Result(ResultCode.CATEGORY_DELETE_SUCCESS, result);
     }
 
@@ -53,13 +62,23 @@ public class CategoryController {
     @PostMapping("/addCategory")
     public Result addCategory(Category category) {
         Integer result = categoryService.insert(category);
+        List<Category> categoryList= categoryService.selectAllCategory();
+        redisTemplate.opsForValue().set("categoryList",categoryList);
+        if(result==0){
+            return new Result(ResultCode.CATEGORY_ADD_FAIL, null);
+        }
         return new Result(ResultCode.CATEGORY_ADD_SUCCESS, result);
     }
 
-    @ApiOperation("更新分类")
+    @ApiOperation("修改分类")
     @PutMapping("/updateCategory")
     public Result updateCategory(Category category) {
         Integer result = categoryService.updateByPrimaryKey(category);
+        List<Category> categoryList= categoryService.selectAllCategory();
+        redisTemplate.opsForValue().set("categoryList",categoryList);
+        if(result==0){
+            return new Result(ResultCode.CATEGORY_UPDATE_, null);
+        }
         return new Result(ResultCode.CATEGORY_UPDATE_SUCCESS, result);
     }
 
@@ -67,6 +86,9 @@ public class CategoryController {
     @GetMapping("/selectCategory")
     public Result selectById(String cid) {
         Category category = categoryService.selectById(cid);
+        if(category==null){
+            return new Result(ResultCode.CATEGORY_FIND_FAIL, null);
+        }
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, category);
     }
 
@@ -74,6 +96,9 @@ public class CategoryController {
     @GetMapping("/selectCategoryByName")
     public Result selectByName(String cname) {
         Category category = categoryService.selectByCname(cname);
+        if(category==null){
+            return new Result(ResultCode.CATEGORY_FIND_FAIL, null);
+        }
         return new Result(ResultCode.CATEGORY_FIND_SUCCESS, category);
     }
 }

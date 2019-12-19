@@ -8,6 +8,7 @@ import com.hlz.gourdmall.model.Category;
 import com.hlz.gourdmall.model.Product;
 import com.hlz.gourdmall.util.Page2Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,6 +30,8 @@ public class CategoryService {
     private CategoryExtMapper categoryExtMapper;
     @Autowired
     private Page2Data page2Data;
+    @Autowired
+    private RedisTemplate<Object,Object> redisTemplate;
 
     public List<Category> selectAllCategory() {
 
@@ -47,7 +50,7 @@ public class CategoryService {
 
     public int insert(Category c) {
         Category category = categoryMapper.selectByPrimaryKey(c.getCid());
-        if (category != null) {
+        if (category == null) {
             return categoryMapper.insert(c);
         }
         return 0;
