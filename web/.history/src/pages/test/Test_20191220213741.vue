@@ -1,0 +1,147 @@
+<template>
+  <div>
+    <div>
+      test...
+      {{ msg }}<br/>
+    </div>
+
+    <div>
+      获取值 --
+      <!-- {{ getCount }} -->
+      <!-- <p> {{getName}} </p>
+      <p> {{getUserMessage}} </p>
+      <p> {{categories}} </p> -->
+      <!-- <p> {{cateGories[0].name}}</p> -->
+      <!-- <p>{{prodList}}</p> -->
+    <br/>
+    </div>
+    <!-- <el-button @click="flashToken">刷新Token</el-button>
+    <el-button @click="getUserMsg">获取用户信息</el-button> -->
+    <el-button @click="SET_CATE('111111')">同步刷新分类列表</el-button>
+    <el-button @click="fetchCateList('222222222')">异步刷新分类列表</el-button>
+    <el-button @click="flashProductList(1,)">异步刷新商品列表</el-button>
+    <div class="echarts-demo">
+    <!-- [1] 为 ECharts 准备一个具备大小 (宽高) 的 DOM -->
+      <div id="chart" ref="chart" style="width: 300px; height: 300px"></div>
+
+    </div>
+    <div >
+      <div id="chartCircle" ref="chartCircle" style=" width: 300px; height: 300px"></div>
+    </div>
+  </div>
+
+</template>
+
+<script>
+import {mapGetters, mapMutations, mapActions} from 'vuex'
+export default {
+  name: 'Test',
+  data () {
+    return {
+      msg: 'hello',
+      chart: '',
+      chartCircle: ''
+    }
+  },
+  created () {
+  },
+  mounted () {
+    // [3] 基于准备好的 DOM，初始化 Echarts 实例
+    // 使用 ref 访问 DOM, 也可以使用 document.getElementById('chart')
+    this.chart = this.$echarts.init(this.$refs.chart)
+    this.chartCircle = this.$echarts.init(this.$refs.chartCircle)
+    // [4] 设置 Echarts 图表数据
+    this.chart.setOption({
+      title: {
+        text: 'ECharts 入门示例'
+      },
+      type: 'pie',
+      tooltip: {},
+      xAxis: {
+        data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+      },
+      yAxis: {},
+      series: [{
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+      }]
+    })
+
+    this.chartCircle.setOption({
+      series: [
+        {
+          name: '访问来源',
+          type: 'pie',
+          radius: '55%',
+          roseType: 'angle',
+          data: [
+            {value: 235, name: '手机销量'},
+            {value: 274, name: '电脑销量'},
+            {value: 310, name: '图书销量'},
+            {value: 335, name: '直接访问'},
+            {value: 400, name: '搜索引擎'}
+          ],
+          itemStyle: {
+            // 阴影的大小
+            shadowBlur: 200,
+            // 阴影水平方向上的偏移
+            shadowOffsetX: 0,
+            // 阴影垂直方向上的偏移
+            shadowOffsetY: 0,
+            // 阴影颜色
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      ]
+    })
+  },
+  // computed: mapGetters(['getCate']),
+  computed: {
+    ...mapGetters(
+      {
+        cateGories: 'getCate',
+        prodList: 'getProductList'
+      }
+    )
+  },
+
+  // computed: {
+  //   getCount () {
+  //     return this.$store.getters.getCategorie
+  //   },
+  //   getName () {
+  //     return this.$store.getters.getName
+  //   },
+  //   getToken () {
+  //     return this.$store.getters.getToken
+  //   },
+  //   getUserMessage () {
+  //     return this.$store.getters.getMessage
+  //   }
+  // },
+  methods: {
+    ...mapMutations(['SET_CATE']),
+    // 获取store内异步方法
+    ...mapActions({
+      flashCateList: 'fetchCateList',
+      flashProductList: 'fetchProductList'
+    })
+    // flashToken () {
+    //   this.$store.commit('flashToken')
+    // },
+    // getUserMsg () {
+    //   this.$store.commit('flashMessage')
+    //   // window.sessionStorage.setItem('store', JSON.stringify(this.$store.state))
+    //   // console.log(this.$store.getters.getMessage)
+    // },
+    // flshCategories () {
+    //   this.$store.commit('flashCategories')
+    // }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
