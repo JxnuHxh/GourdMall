@@ -33,6 +33,7 @@ public enum ResultCode {
     CATEGORY_DELETE_SUCCESS(2602,"删除分类成功"),
     CATEGORY_UPDATE_SUCCESS(2603,"修改分类成功"),
     CATEGORY_UPDATE_(4603,"修改分类失败"),
+    CATEGORY_UPDATE_F(4610,"该分类不存在"),
     CART_ADD_SUCCESS(2604,"商品添加成功"),
     CART_DELETE_SUCCESS(2605,"商品删除成功"),
     CART_SELECT_SUCCESS(2606,"购物车查询成功"),

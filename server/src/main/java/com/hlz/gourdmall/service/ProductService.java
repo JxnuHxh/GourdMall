@@ -37,6 +37,9 @@ public class ProductService {
         Map<String, Object> data = page2Data.page2Data(products);
         return data;
     }
+    public int selectProduct(String cid){
+        return productExtMapper.selectByCid(cid);
+    }
 
     public Map<String, Object> getProductById(String id) {
         Product product = productMapper.selectByPrimaryKey(id);

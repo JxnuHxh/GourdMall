@@ -19,5 +19,4 @@ public class GourdmallApplication {
     public static void main(String[] args) {
         SpringApplication.run(GourdmallApplication.class, args);
     }
-
 }

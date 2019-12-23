@@ -4,6 +4,7 @@ import com.hlz.gourdmall.dto.Result;
 import com.hlz.gourdmall.enums.ResultCode;
 import com.hlz.gourdmall.model.Category;
 import com.hlz.gourdmall.service.CategoryService;
+import com.hlz.gourdmall.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class CategoryController {
     private CategoryService categoryService;
     @Autowired
     private RedisTemplate<Object,Object> redisTemplate;
+    @Autowired
+    private ProductService productService;
 
     @ApiOperation("查询所有分类")
     @GetMapping("/listCategory")
@@ -49,12 +52,19 @@ public class CategoryController {
     @ApiOperation("删除分类")
     @DeleteMapping("/deleteCategoryById")
     public Result deleteByPrimaryKey(String cid) {
-        int result = categoryService.deleteByPrimaryKey(cid);
+
         List<Category> categoryList= categoryService.selectAllCategory();
-        redisTemplate.opsForValue().set("categoryList",categoryList);
-        if(result==0){
+        int count =productService.selectProduct(cid);
+        if(count>0){
             return new Result(ResultCode.CATEGORY_DELETE_FAIL, null);
         }
+        int result = categoryService.deleteByPrimaryKey(cid);
+        if(result==0){
+            redisTemplate.opsForValue().set("categoryList",categoryList);
+            return new Result(ResultCode.CATEGORY_UPDATE_F, null);
+        }
+        redisTemplate.opsForValue().set("categoryList",categoryList);
+
         return new Result(ResultCode.CATEGORY_DELETE_SUCCESS, result);
     }
 

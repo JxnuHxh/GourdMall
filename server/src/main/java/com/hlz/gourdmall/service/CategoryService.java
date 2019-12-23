@@ -41,11 +41,9 @@ public class CategoryService {
     }
 
     public int deleteByPrimaryKey(String cid) {
-        Category category = categoryMapper.selectByPrimaryKey(cid);
-        if (category != null) {
+
             return categoryMapper.deleteByPrimaryKey(cid);
-        }
-        return 0;
+
     }
 
     public int insert(Category c) {

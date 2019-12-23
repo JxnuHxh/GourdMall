@@ -13,5 +13,7 @@ public interface ProductExtMapper {
 
     @Select("select * from product")
     Page<Product> listProduct();
+    @Select("select count(*) from product where cid=#{cid}")
+    int selectByCid(String cid);
 
 }
