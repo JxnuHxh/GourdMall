@@ -1,5 +1,6 @@
 package com.hlz.gourdmall.controller;
 
+
 import com.hlz.gourdmall.dto.Result;
 import com.hlz.gourdmall.enums.ResultCode;
 import com.hlz.gourdmall.dto.Cart;
@@ -11,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -24,15 +27,15 @@ import org.springframework.web.bind.annotation.*;
 public class CartController {
     @Autowired
     private CartService cartService;
-    @Autowired
-    private RedisTemplate<Object,Object> redisTemplate;
+   @Autowired
+   private RedisTemplate redisTemplate;
     
     @ApiOperation("增加商品到购物车")
     @GetMapping("/addToCart")
     public Result addCart(String pid, int num,int uid) {
-          System.out.println(pid+" "+num+" "+uid);
+          System.out.println(pid+" "+num);
         Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+uid);
-        if (null == cart.getCartItems()) {
+        if (null == cart) {
             cart = new Cart();
         }
         //如果获取到,使用即可
@@ -63,7 +66,7 @@ public class CartController {
     @ApiOperation("清空购物车")
     @DeleteMapping("clearCart")
     public Result clearCart(Integer uid) {
-        redisTemplate.delete("cart"+uid);
+
         Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+uid);
         //调用购物车删除购物项方法
         cart.clearCart();

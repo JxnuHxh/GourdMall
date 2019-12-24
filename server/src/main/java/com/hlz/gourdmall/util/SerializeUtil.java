@@ -35,10 +35,6 @@ public class SerializeUtil {
         }
         return null;
     }
-
-
-
-
     public static Object unserialize( byte[] bytes) {
 
         ByteArrayInputStream bais = null;
