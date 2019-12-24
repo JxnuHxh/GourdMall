@@ -52,7 +52,6 @@ public class CartController {
         redisTemplate.opsForValue().set("cart"+uid,cart);
         return new Result(ResultCode.CART_ADD_SUCCESS, cart);
     }
-
     @ApiOperation("根据商品id删除购物车的商品")
     @DeleteMapping("deleteCart")
     public Result deleteCart(String pid, Integer uid) {

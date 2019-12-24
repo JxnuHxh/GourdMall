@@ -85,7 +85,7 @@ public class OrderController {
     @GetMapping("/saveOrder01")
     public Result saveOrder01(String token){
         User user=userService.selectUserByToken(token);
-        Cart cart=(Cart)redisTemplate.opsForValue().get("cart");
+        Cart cart=(Cart)redisTemplate.opsForValue().get("cart"+user.getUid());
         Order order=new Order();
         order.setOid(UUIDUtils.getCode());
         order.setOrdertime(new Date());
@@ -109,7 +109,6 @@ public class OrderController {
         //清空购物车
         cart.clearCart();
         //将订单放入request
-        redisTemplate.opsForValue().set("order", order);
-        return new Result(ResultCode.ORDER_ADD_SUCCESS, null);
+        return new Result(ResultCode.ORDER_ADD_SUCCESS, order);
     }
 }
