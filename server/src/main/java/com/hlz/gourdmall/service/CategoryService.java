@@ -41,9 +41,7 @@ public class CategoryService {
     }
 
     public int deleteByPrimaryKey(String cid) {
-
             return categoryMapper.deleteByPrimaryKey(cid);
-
     }
 
     public int insert(Category c) {

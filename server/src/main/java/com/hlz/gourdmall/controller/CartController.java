@@ -63,6 +63,7 @@ public class CartController {
     @ApiOperation("清空购物车")
     @DeleteMapping("clearCart")
     public Result clearCart(Integer uid) {
+        redisTemplate.delete("cart"+uid);
         Cart cart = (Cart) redisTemplate.opsForValue().get("cart"+uid);
         //调用购物车删除购物项方法
         cart.clearCart();

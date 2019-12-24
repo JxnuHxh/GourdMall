@@ -10,7 +10,8 @@ import java.util.Map;
  * @date: 2019/12/14
  * @description:
  */
-public class Cart implements Serializable {
+public class Cart  implements Serializable{
+    
     //总计/积分
     private double total = 0;
     //个数不确定的购物项 商品pid<===>CartItem
@@ -70,7 +71,20 @@ public class Cart implements Serializable {
         }
         return total;
     }
+    public double getTotal01() {
+        //向让总计请0
+        total = 0;
+        //获取到Map中所有的购物项
+        Collection<CartItem> values = map.values();
 
+        //遍历所有的购物项,将购物项上的小计相加
+        for (CartItem cartItem : values) {
+
+                total += cartItem.getSubTotal();
+
+        }
+        return total;
+    }
 
     public void setTotal(double total) {
         this.total = total;
