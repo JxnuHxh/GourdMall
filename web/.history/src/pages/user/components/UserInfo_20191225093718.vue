@@ -25,7 +25,7 @@
           </el-dialog>
         </el-col>
       </el-row>
-      <el-row style="margin-top: 20pxx ">
+      <el-row>
         <el-col :span="14">
           <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-form-item label="用户名称" prop="name">
@@ -120,10 +120,10 @@ export default {
           { type: 'array', required: true, message: '请至少选择一个喜爱分类', trigger: 'change' }
         ],
         resource: [
-          { required: true, message: '请选择特殊癖好', trigger: 'change' }
+          { required: true, message: '请选择活动资源', trigger: 'change' }
         ],
         desc: [
-          { required: true, message: '请填写个人签名', trigger: 'blur' }
+          { required: true, message: '请填写活动形式', trigger: 'blur' }
         ]
       }
 

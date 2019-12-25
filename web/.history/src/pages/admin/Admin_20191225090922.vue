@@ -214,7 +214,7 @@ export default {
     changeAccount () {
       this.$router.push('/adminLogin')
     },
-    adminLogout () {
+    adminLogouy () {
       this.$router.push('/')
     },
     addTab (targetIndex, tabTitle, componentName) {

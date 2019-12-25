@@ -25,7 +25,7 @@
           </el-dialog>
         </el-col>
       </el-row>
-      <el-row style="margin-top: 20pxx ">
+      <el-row>
         <el-col :span="14">
           <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-form-item label="用户名称" prop="name">
@@ -111,19 +111,19 @@ export default {
           { required: true, message: '请选择收货地址', trigger: 'change' }
         ],
         date1: [
-          { type: 'date', required: true, message: '请选择收货日期', trigger: 'change' }
+          { type: 'date', required: true, message: '请选择生日', trigger: 'change' }
         ],
         date2: [
-          { type: 'date', required: true, message: '请选择收货时间', trigger: 'change' }
+          { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
         ],
         type: [
-          { type: 'array', required: true, message: '请至少选择一个喜爱分类', trigger: 'change' }
+          { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
         ],
         resource: [
-          { required: true, message: '请选择特殊癖好', trigger: 'change' }
+          { required: true, message: '请选择活动资源', trigger: 'change' }
         ],
         desc: [
-          { required: true, message: '请填写个人签名', trigger: 'blur' }
+          { required: true, message: '请填写活动形式', trigger: 'blur' }
         ]
       }
 

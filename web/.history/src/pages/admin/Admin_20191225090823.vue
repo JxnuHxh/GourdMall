@@ -63,7 +63,7 @@
           <template slot="title">超级管理员</template>
           <el-menu-item index="2-1">个人资料</el-menu-item>
           <el-menu-item index="2-2" @click="changeAccount()">切换账号</el-menu-item>
-          <el-menu-item index="2-3" @click="adminLogout()">登出后台</el-menu-item>
+          <el-menu-item index="2-3">登出后台</el-menu-item>
         </el-submenu>
         <el-menu-item index="2">消息中心</el-menu-item>
         <el-menu-item index="3"> <i class="el-icon-lock"></i> </el-menu-item>
@@ -213,9 +213,6 @@ export default {
     }),
     changeAccount () {
       this.$router.push('/adminLogin')
-    },
-    adminLogout () {
-      this.$router.push('/')
     },
     addTab (targetIndex, tabTitle, componentName) {
       // console.log('菜单索引：' + targetIndex)

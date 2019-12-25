@@ -93,7 +93,7 @@ export default {
       }],
       logoUrl: LogoUrl,
       wrapStyle: {
-        height: '930px',
+        height: '900px',
         backgroundImage: 'url(' + WrapBg + ')',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',

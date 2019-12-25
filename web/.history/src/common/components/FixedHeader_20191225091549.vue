@@ -11,13 +11,13 @@
           <el-link id="right-part" :underline="false">
             <el-dropdown v-if="getLoginState" class="right-links">
               <span class="el-dropdown-link">
-                {{getUserMessage.nickname}} <i class="el-icon-arrow-down el-icon--right"></i>
+                {{getUserMessage}} <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu  slot="dropdown" style="margin-top: -15px">
-                <router-link style="text-decoration: none;" :to="{name:'User',params:{action:'OrderList'}}"><el-dropdown-item >  我的订单 </el-dropdown-item> </router-link>
-                <router-link style="text-decoration: none;" :to="{name:'User',params:{action:'UserInfo'}}"><el-dropdown-item> 账号资料</el-dropdown-item> </router-link>
-                <router-link style="text-decoration: none;" :to="{name:'User',params:{action:'UserAdr'}}"><el-dropdown-item> 收货地址</el-dropdown-item> </router-link>
-                <el-dropdown-item divided  > <div @click="LogOut()"><span >退出登录</span></div>  </el-dropdown-item>
+                <el-dropdown-item> 我的订单</el-dropdown-item>
+                <el-dropdown-item> 账号资料</el-dropdown-item>
+                <el-dropdown-item> 收货地址</el-dropdown-item>
+                <el-dropdown-item divided> 退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
             <el-link v-if="!getLoginState" :underline="false" class="right-links" >注册</el-link>

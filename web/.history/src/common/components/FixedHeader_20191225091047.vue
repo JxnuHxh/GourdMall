@@ -9,20 +9,20 @@
           <el-link :underline="false"><div @mouseenter="naventer('家具')"> 家具</div></el-link>
           <el-link :underline="false"><div @mouseenter="naventer('服饰')"> 服饰</div></el-link>
           <el-link id="right-part" :underline="false">
-            <el-dropdown v-if="getLoginState" class="right-links">
+            <el-dropdown v-if="login" class="right-links">
               <span class="el-dropdown-link">
-                {{getUserMessage.nickname}} <i class="el-icon-arrow-down el-icon--right"></i>
+                周鹏武 <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu  slot="dropdown" style="margin-top: -15px">
-                <router-link style="text-decoration: none;" :to="{name:'User',params:{action:'OrderList'}}"><el-dropdown-item >  我的订单 </el-dropdown-item> </router-link>
-                <router-link style="text-decoration: none;" :to="{name:'User',params:{action:'UserInfo'}}"><el-dropdown-item> 账号资料</el-dropdown-item> </router-link>
-                <router-link style="text-decoration: none;" :to="{name:'User',params:{action:'UserAdr'}}"><el-dropdown-item> 收货地址</el-dropdown-item> </router-link>
-                <el-dropdown-item divided  > <div @click="LogOut()"><span >退出登录</span></div>  </el-dropdown-item>
+                <el-dropdown-item> 我的订单</el-dropdown-item>
+                <el-dropdown-item> 账号资料</el-dropdown-item>
+                <el-dropdown-item> 收货地址</el-dropdown-item>
+                <el-dropdown-item divided> 退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-            <el-link v-if="!getLoginState" :underline="false" class="right-links" >注册</el-link>
+            <el-link v-if="!login" :underline="false" class="right-links" >注册</el-link>
             <!-- <el-divider direction="vertical"></el-divider> -->
-            <el-link v-if="!getLoginState"  :underline="false" class="right-links" >登录</el-link>
+            <el-link v-if="!login"  :underline="false" class="right-links" >登录</el-link>
           </el-link >
         </div>
       </el-col>
@@ -76,13 +76,7 @@ export default {
       src: 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png'
     }
   },
-  computed: {
-    ...mapGetters({
-      getCate: 'getCate',
-      getLoginState: 'getLoginState',
-      getUserMessage: 'getUserMessage'
-    })
-  },
+  computed: {},
   watch: {},
   methods: {
     showFloat: function () {

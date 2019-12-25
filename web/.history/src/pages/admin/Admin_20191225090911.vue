@@ -214,8 +214,8 @@ export default {
     changeAccount () {
       this.$router.push('/adminLogin')
     },
-    adminLogout () {
-      this.$router.push('/')
+    adminLogouy () {
+
     },
     addTab (targetIndex, tabTitle, componentName) {
       // console.log('菜单索引：' + targetIndex)
