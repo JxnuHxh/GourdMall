@@ -1,0 +1,159 @@
+<template>
+  <el-row :gutter="5">
+    <el-col :span="5">
+      <el-card :body-style="{ padding: '0px', height: '350px' }">
+        <el-breadcrumb style="height: 25px; line-height: 25px" separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-breadcrumb style="height: 25px; line-height: 25px" separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-breadcrumb style="height: 25px; line-height: 25px" separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
+
+        <el-breadcrumb style="height: 25px; line-height: 25px" separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-breadcrumb style="height: 25px; line-height: 25px" separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-breadcrumb style="height: 25px; line-height: 25px" separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-breadcrumb style="height: 25px; line-height: 25px" separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-breadcrumb style="height: 25px; line-height: 25px" separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-breadcrumb style="height: 25px; line-height: 25px" separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-breadcrumb style="height: 25px; line-height: 25px" separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-breadcrumb style="height: 25px; line-height: 25px" separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-breadcrumb style="height: 25px; line-height: 25px" separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-breadcrumb style="height: 25px; line-height: 25px" separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-breadcrumb style="height: 25px; line-height: 25px" separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        </el-breadcrumb>
+
+      </el-card>
+
+    </el-col>
+    <el-col :span="15">
+      <div class="block">
+        <el-carousel height="350px">
+          <el-carousel-item v-for="item in urls" :key="item">
+              <div>
+                <img :src="item" height="450px" width="100%" alt="">
+              </div>
+          </el-carousel-item>
+        </el-carousel>
+      </div>
+    </el-col>
+    <el-col :span="4">
+      <el-carousel  height="350px" direction="vertical" :autoplay="true">
+        <el-carousel-item v-for="(item, index) in showVerImg.slice(0, -2)" :key="index">
+          <div>
+            <img :src="item" indicator-position="none" height="180px" width="100%" alt="">
+          </div>
+          <div>
+
+            <img :src="showVerImg[index+1]" indicator-position="none" height="180px" width="100%" alt="">
+          </div>
+        </el-carousel-item>
+      </el-carousel>
+    </el-col>
+  </el-row>
+</template>
+
+<script>
+export default {
+  name: 'Carousel',
+  components: {},
+  data () {
+    return {
+      urls: [
+        'https://resource.smartisan.com/resource/1/1220858shoujilouceng.jpg',
+        'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
+        'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg',
+        'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg',
+        'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
+        'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
+        'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg'
+      ],
+      showVerImg: [
+        'https://resource.smartisan.com/resource/a1c53b5f12dd7ef790cadec0eaeaf466.jpg',
+        'https://resource.smartisan.com/resource/2b05dbca9f5a4d0c1270123f42fb834c.jpg',
+        'https://resource.smartisan.com/resource/804edf579887b3e1fae4e20a379be5b5.png',
+        'https://resource.smartisan.com/resource/10525c4b21f039fc8ccb42cd1586f5cd.jpg',
+        'https://resource.smartisan.com/resource/5e4b1feddb13639550849f12f6b2e202.jpg'
+      ]
+    }
+  },
+  computed: {},
+  watch: {},
+  methods: {
+  },
+  created () {
+  },
+  mounted () {
+  }
+}
+</script>
+<style scoped>
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 450px;
+  margin: 0 auto;
+  text-align: center
+}
+.el-carousel {
+  border-radius: 5px;
+}
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+.el-carousel__item:nth-child(2n+1) {
+  background-color: #d3dce6;
+}
+</style>
